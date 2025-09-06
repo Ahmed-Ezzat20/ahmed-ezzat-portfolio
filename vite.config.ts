@@ -5,6 +5,7 @@ import { jsxLocPlugin } from '@builder.io/vite-plugin-jsx-loc';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: mode === 'production' ? '/ahmed-ezzat-portfolio/' : '/',
   server: {
     host: "::",
     port: 8080,

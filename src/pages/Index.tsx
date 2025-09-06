@@ -35,10 +35,10 @@ const Index = () => {
         <div className="container mx-auto px-6 text-center">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="text-2xl font-serif font-bold">
-              Portfolio
+              Ahmed Ezzat
             </div>
             <p className="text-primary-foreground/80">
-              © 2024 Portfolio. Crafted with passion and purpose.
+              © 2024 Ahmed Ezzat. AI Engineer passionate about innovation.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-primary-foreground/80 hover:text-primary-foreground transition-smooth">

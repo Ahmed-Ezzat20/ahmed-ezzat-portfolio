@@ -13,56 +13,85 @@ const PortfolioSection = () => {
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform UI/UX Overhaul',
-      description: 'Comprehensive UI/UX design for a scalable e-commerce platform, focusing on intuitive navigation, seamless checkout flows and a cohesive design system.',
+      title: 'Alzheimer MRI Classifier',
+      description: 'Deep learning architecture for Alzheimer\'s Disease classification using MRI scans. Conducted comprehensive data preprocessing, feature engineering, and hyperparameter tuning.',
       image: projectWebDev,
-      category: 'web',
-      technologies: ['Figma', 'Adobe XD', 'Design System', 'User Testing', 'Prototyping'],
+      category: 'ai',
+      technologies: ['Python', 'TensorFlow', 'Deep Learning', 'MRI Analysis', 'Computer Vision'],
       liveUrl: '#',
       githubUrl: '#',
       results: {
-        performance: '+40% faster loading',
-        conversion: '+25% increase in sales',
-        users: '10K+ active users'
+        accuracy: '92% accuracy achieved',
+        impact: 'Medical diagnosis support',
+        tech: 'CNN architecture'
       }
     },
     {
       id: 2,
-      title: 'Health & Fitness App Experience Design',
-      description: 'End-to-end UI/UX design for a mobile app that tracks workouts, nutrition and wellness metrics, integrating rich visuals and engaging micro-interactions.',
-      image: projectMobileApp,
-      category: 'mobile',
-      technologies: ['Figma', 'Sketch', 'InVision', 'User Personas', 'Prototype Testing'],
+      title: 'Plant Leaf Classification Research',
+      description: 'Published IEEE research on lightweight plant leaf classification using transfer learning. Designed pipeline for real-time classification on edge devices with improved accuracy.',
+      image: projectBranding,
+      category: 'ai',
+      technologies: ['Transfer Learning', 'Edge Computing', 'IEEE Publication', 'Computer Vision', 'Research'],
       liveUrl: '#',
       githubUrl: '#',
       results: {
-        downloads: '50K+ downloads',
-        rating: '4.8/5 stars',
-        retention: '80% user retention'
+        publication: 'IEEE JAC-ECC 2024',
+        innovation: 'Transfer learning pipeline',
+        impact: 'Real-time edge deployment'
       }
     },
     {
       id: 3,
-      title: 'Brand Identity System',
-      description: 'Complete brand identity design for a tech startup, including logo design, color palette, typography, and comprehensive brand guidelines.',
-      image: projectBranding,
-      category: 'design',
-      technologies: ['Figma', 'Illustrator', 'InDesign', 'Miro', 'Style Guide'],
+      title: 'YOLOv8 Prohibited Object Detection',
+      description: 'Graduation project implementing YOLOv8 for detecting prohibited objects in online exams, combined with eye-gaze tracking and Siamese network for face recognition.',
+      image: projectMobileApp,
+      category: 'cv',
+      technologies: ['YOLOv8', 'Computer Vision', 'Siamese Networks', 'Eye Tracking', 'PyTorch'],
       liveUrl: '#',
       githubUrl: '#',
       results: {
-        recognition: '+200% brand recognition',
-        engagement: '+150% social engagement',
-        awards: '3 design awards'
+        performance: '86 mAP detection',
+        reduction: '89% cheating reduction',
+        innovation: 'Multi-modal approach'
+      }
+    },
+    {
+      id: 4,
+      title: 'Cars Plate Detection and OCR',
+      description: 'License plate detection and OCR system for a car service management platform in KSA. Focused on data validation, preprocessing, and model optimization.',
+      image: projectBranding,
+      category: 'cv',
+      technologies: ['OpenCV', 'OCR', 'Image Processing', 'Python', 'Data Validation'],
+      liveUrl: '#',
+      githubUrl: '#',
+      results: {
+        accuracy: '99% error reduction',
+        deployment: 'Production system',
+        impact: 'Automated registration'
+      }
+    },
+    {
+      id: 5,
+      title: 'Background Removal Model',
+      description: 'Delivered background removal model with quantization optimization, reducing model size by 75% for deployment on edge devices like mobile phones.',
+      image: projectWebDev,
+      category: 'ai',
+      technologies: ['Model Quantization', 'Edge Computing', 'Mobile Deployment', 'Optimization'],
+      liveUrl: '#',
+      githubUrl: '#',
+      results: {
+        optimization: '75% size reduction',
+        deployment: 'Mobile-ready',
+        performance: 'Edge computing'
       }
     },
   ];
 
   const categories = [
     { id: 'all', label: 'All Projects' },
-    { id: 'web', label: 'Web Development' },
-    { id: 'mobile', label: 'Mobile Apps' },
-    { id: 'design', label: 'Design' },
+    { id: 'ai', label: 'AI & ML' },
+    { id: 'cv', label: 'Computer Vision' },
   ];
 
   const filteredProjects = filter === 'all' 
@@ -79,7 +108,8 @@ const PortfolioSection = () => {
             Featured <span className="text-accent-gradient">Projects</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            A showcase of my recent work, highlighting expertise across web, mobile, and brand experiences.
+            A showcase of my AI and machine learning projects, demonstrating expertise in computer vision, 
+            deep learning, and production-ready AI solutions.
           </p>
 
           {/* Filter Buttons */}

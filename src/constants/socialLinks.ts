@@ -2,23 +2,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faLinkedin, faXTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons';
 
-// TODO: Replace these placeholder links with actual personal social media profiles
+// Ahmed Ezzat's social media profiles
 export const socialLinks = [
   {
     icon: faGithub,
-    href: 'https://github.com',
+    href: 'https://github.com/ahmedezzat0247',
     label: 'GitHub',
     type: 'external' as const,
   },
   {
     icon: faLinkedin,
-    href: 'https://linkedin.com',
+    href: 'https://linkedin.com/in/ahmed-ezzat-ahmed',
     label: 'LinkedIn',
     type: 'external' as const,
   },
   {
     icon: faEnvelope,
-    href: 'mailto:contact@example.com',
+    href: 'mailto:ahmedezzat0247@gmail.com',
     label: 'Email',
     type: 'email' as const,
   },

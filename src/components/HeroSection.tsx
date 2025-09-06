@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
-import professionalHeadshot from '@/assets/professional-headshot.webp';
+import professionalHeadshot from '@/assets/ahmed-headshot.png';
 import { socialLinks } from '@/constants/socialLinks';
 
 const HeroSection = () => {
@@ -27,15 +27,16 @@ const HeroSection = () => {
             <div className="mb-6">
               <h1 className="text-5xl lg:text-7xl font-serif font-bold mb-4">
                 <span className="text-slate-800 dark:text-slate-100">
-                  Your Name 
+                  Ahmed Ezzat 
                 </span>               
               </h1>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-4">
-                <span className="text-slate-600 dark:text-slate-300">UI/UX Designer</span>
+                <span className="text-slate-600 dark:text-slate-300">AI Engineer</span>
               </h2>
               <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-2xl">
-                Crafting beautiful, user-centred digital experiences that blend aesthetic elegance
-                with intuitive functionality.
+                Building Voice AI Solutions and specializing in Computer Vision & Generative AI. 
+                Manus Fellow passionate about translating cutting-edge research into production-level 
+                solutions that create real impact.
               </p>
             </div>
 

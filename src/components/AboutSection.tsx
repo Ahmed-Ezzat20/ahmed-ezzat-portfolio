@@ -1,50 +1,99 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Progress } from '@/components/ui/progress';
 import { Code2, Palette, Smartphone, Database, Globe, Users, Briefcase } from 'lucide-react';
 
 
 const AboutSection = () => {
-  const [skillProgress, setSkillProgress] = useState<number[]>([]);
   const [timelineHeight, setTimelineHeight] = useState(0);
   const [visibleItems, setVisibleItems] = useState<boolean[]>([]);
   const skillsRef = useRef<HTMLDivElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  const skills = [
-    { name: 'UI/UX Design', level: 95, icon: Palette },
-    { name: 'Brand Identity', level: 90, icon: Briefcase },
-    { name: 'Web Design', level: 88, icon: Globe },
-    { name: 'Prototyping', level: 85, icon: Smartphone },
-    { name: 'Design Systems', level: 87, icon: Code2 },
-    { name: 'Client Relations', level: 92, icon: Users },
+  const skillCategories = [
+    {
+      category: 'AI & Machine Learning',
+      icon: Database,
+      skills: [
+        { name: 'Computer Vision', experience: 'Expert', years: '3+ years' },
+        { name: 'Deep Learning', experience: 'Expert', years: '3+ years' },
+        { name: 'Generative AI', experience: 'Advanced', years: '2+ years' },
+        { name: 'RAG Systems', experience: 'Advanced', years: '2+ years' },
+      ]
+    },
+    {
+      category: 'Voice AI & NLP',
+      icon: Smartphone,
+      skills: [
+        { name: 'Text-to-Speech', experience: 'Expert', years: '2+ years' },
+        { name: 'Speech Processing', experience: 'Advanced', years: '2+ years' },
+        { name: 'Natural Language Processing', experience: 'Advanced', years: '2+ years' },
+      ]
+    },
+    {
+      category: 'Development & Deployment',
+      icon: Code2,
+      skills: [
+        { name: 'Python/PyTorch', experience: 'Expert', years: '4+ years' },
+        { name: 'Model Deployment', experience: 'Advanced', years: '2+ years' },
+        { name: 'Edge Computing', experience: 'Advanced', years: '1+ years' },
+        { name: 'API Development', experience: 'Advanced', years: '2+ years' },
+      ]
+    },
+    {
+      category: 'Research & Leadership',
+      icon: Briefcase,
+      skills: [
+        { name: 'Research & Development', experience: 'Expert', years: '3+ years' },
+        { name: 'IEEE Publications', experience: 'Advanced', years: '1+ years' },
+        { name: 'Team Leadership', experience: 'Advanced', years: '2+ years' },
+        { name: 'Community Building', experience: 'Expert', years: '2+ years' },
+      ]
+    },
   ];
 
   const timeline = [
     {
+      year: '2025',
+      title: 'AI Engineer',
+      company: 'GenArabia (Full-time)',
+      description: 'Building Voice AI Solutions as part of the Gen AI Solutions Company. Focus on scalable AI implementations.',
+    },
+    {
+      year: '2025',
+      title: 'AI Engineer',
+      company: 'Andalusi (Part-time)',
+      description: 'Delivered background removal model with 75% size reduction through quantization for mobile deployment.',
+    },
+    {
       year: '2024',
-      title: 'Senior Freelance Designer',
-      company: 'Independent Practice',
-      description: 'Building comprehensive brand identities and digital experiences for diverse clients worldwide.',
+      title: 'AI Engineer',
+      company: 'E Connect Africa',
+      description: 'Developed course generation pipeline with RAG systems, TTS models, and 2D character animation.',
     },
     {
-      year: '2022',
-      title: 'Lead Designer',
-      company: 'Creative Studio Co.',
-      description: 'Spearheaded major branding projects and mentored junior designers in creative processes.',
+      year: '2024',
+      title: 'Site Supervisor',
+      company: 'almentor',
+      description: 'Part-time management role overseeing site operations and team coordination.',
     },
     {
-      year: '2020',
-      title: 'Junior Designer',
-      company: 'Design Agency',
-      description: 'Focused on digital design and user experience, developing skills in modern design tools.',
+      year: '2024',
+      title: 'BS Computer Science',
+      company: 'Helwan University',
+      description: 'Graduated with Very Good GPA (3.27). Published IEEE research on plant leaf classification.',
     },
     {
-      year: '2019',
-      title: 'Design Degree',
-      company: 'Art & Design University',
-      description: 'Graduated with honors, specializing in visual communication and digital design.',
+      year: '2023',
+      title: 'ML Intern',
+      company: 'TensorGraph',
+      description: 'Utilized BERT for entity recognition and GPT for synthetic data generation.',
+    },
+    {
+      year: '2022-2024',
+      title: 'Instructor',
+      company: 'Developer Career',
+      description: 'Part-time teaching role focusing on team management and technical instruction.',
     },
   ];
 
@@ -57,10 +106,7 @@ const AboutSection = () => {
     const skillsObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          // Animate skill progress bars
-          setTimeout(() => {
-            setSkillProgress(skills.map(skill => skill.level));
-          }, 300);
+          // Skills section is visible - no animation needed for new design
         }
       });
     }, observerOptions);
@@ -111,18 +157,18 @@ const AboutSection = () => {
   const values = [
     {
       icon: Code2,
-      title: 'Clean Design',
-      description: 'Creating clear, cohesive design systems that scale gracefully.',
+      title: 'Research-Driven',
+      description: 'Translating cutting-edge research into practical, production-ready solutions.',
     },
     {
       icon: Users,
-      title: 'User-Centric',
-      description: 'Putting user experience at the heart of every design decision.',
+      title: 'Impact-Focused',
+      description: 'Building AI systems that solve real-world problems and create meaningful value.',
     },
     {
       icon: Globe,
       title: 'Innovation',
-      description: 'Embracing new technologies and pushing creative boundaries.',
+      description: 'Pushing the boundaries of what\'s possible with AI and machine learning.',
     },
   ];
 
@@ -136,8 +182,8 @@ const AboutSection = () => {
             About <span className="text-accent-gradient">Me</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Passionate about creating digital experiences that combine beautiful design 
-            with powerful functionality. I believe in the perfect balance of creativity and technology.
+            Passionate AI Engineer specializing in Computer Vision and Generative AI. 
+            I translate cutting-edge research into production-level solutions that make a real impact.
           </p>
         </div>
 
@@ -148,20 +194,27 @@ const AboutSection = () => {
             <h3 className="text-2xl font-serif font-semibold mb-6">My Journey</h3>
             <div className="space-y-6 text-muted-foreground">
               <p>
-                My passion for design started during university when I discovered the magic 
-                of bringing ideas to life through visual storytelling. What began as curiosity quickly grew into 
-                a deep love for creating meaningful brand experiences.
+                My journey into AI began during my Computer Science studies at Helwan University, 
+                where I discovered the fascinating world of machine learning and computer vision. 
+                What started as academic curiosity quickly evolved into a passion for solving real-world problems with AI.
               </p>
               <p>
-                Over the years, I've had the privilege of working with diverse clients, 
-                from innovative startups to established brands. Each project has taught me 
-                something new and reinforced my belief in the power of thoughtful design and 
-                strategic creative thinking.
+                Throughout my career, I've had the opportunity to work on diverse AI projects, 
+                from developing background removal models for mobile applications to creating 
+                comprehensive course generation pipelines with RAG systems and TTS models. 
+                Each project has deepened my understanding of how AI can transform industries.
               </p>
               <p>
-                When I'm not designing, you'll find me exploring new creative trends, collaborating with 
-                fellow designers, or sharing knowledge with the creative community through 
-                workshops and mentoring.
+                As a <strong>Manus Fellow</strong>, I'm actively involved in the AI community, hosting events and 
+                hackathons in Cairo to share knowledge and inspire the next generation of AI engineers. 
+                I also served as <strong>ComSoc Chapter Chairman</strong> at IEEE Helwan Student Branch, where I led 
+                a team of nearly 50 volunteers across various tech tracks.
+              </p>
+              <p>
+                With over <strong>13,000 LinkedIn followers</strong>, I'm passionate about building AI communities and 
+                translating cutting-edge research into production-level solutions that create real impact. 
+                My recent focus has been on <strong>Voice AI Solutions</strong> and advancing the field through 
+                both practical applications and research publications.
               </p>
             </div>
           </div>
@@ -169,23 +222,34 @@ const AboutSection = () => {
           {/* Skills */}
           <div ref={skillsRef} className="animate-slide-up" style={{ animationDelay: '0.2s' }}>
             <h3 className="text-2xl font-serif font-semibold mb-6">Skills & Expertise</h3>
-            <div className="space-y-4">
-              {skills.map((skill, index) => {
-                const Icon = skill.icon;
+            <div className="space-y-6">
+              {skillCategories.map((category, categoryIndex) => {
+                const Icon = category.icon;
                 return (
-                  <div key={skill.name} className="space-y-2">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2">
-                        <Icon className="h-4 w-4 text-accent" />
-                        <span className="font-medium">{skill.name}</span>
+                  <Card key={categoryIndex} className="p-6 shadow-card hover:shadow-elegant transition-smooth">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-gradient-accent rounded-lg flex items-center justify-center">
+                        <Icon className="h-5 w-5 text-accent-foreground" />
                       </div>
-                      <span className="text-sm text-muted-foreground">{skill.level}%</span>
+                      <h4 className="text-lg font-semibold">{category.category}</h4>
                     </div>
-                    <Progress 
-                      value={skillProgress[index] || 0} 
-                      className="h-2"
-                    />
-                  </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      {category.skills.map((skill, skillIndex) => (
+                        <div key={skillIndex} className="flex items-center justify-between p-3 bg-gradient-subtle rounded-lg">
+                          <div>
+                            <span className="font-medium text-sm">{skill.name}</span>
+                            <div className="text-xs text-muted-foreground">{skill.years}</div>
+                          </div>
+                          <Badge 
+                            variant={skill.experience === 'Expert' ? 'default' : 'secondary'}
+                            className={skill.experience === 'Expert' ? 'bg-gradient-accent text-accent-foreground' : ''}
+                          >
+                            {skill.experience}
+                          </Badge>
+                        </div>
+                      ))}
+                    </div>
+                  </Card>
                 );
               })}
             </div>

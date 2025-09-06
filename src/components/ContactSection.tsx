@@ -13,19 +13,19 @@ const ContactSection = () => {
     {
       icon: faEnvelope,
       label: 'Email',
-      value: 'hello@portfolio.com',
-      href: 'mailto:hello@portfolio.com',
+      value: 'ahmedezzat0247@gmail.com',
+      href: 'mailto:ahmedezzat0247@gmail.com',
     },
     {
       icon: faPhone,
       label: 'Phone',
-      value: '+1 (555) 123-4567',
-      href: 'tel:+15551234567',
+      value: '+20 109 163 8280',
+      href: 'tel:+201091638280',
     },
     {
       icon: faLocationDot,
       label: 'Location',
-      value: 'San Francisco, CA',
+      value: 'Cairo, Egypt',
       href: '#',
     },
   ];
@@ -45,8 +45,8 @@ const ContactSection = () => {
             Let's <span className="text-accent-gradient">Connect</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Have a project in mind or just want to say hello? I'd love to hear from you. 
-            Let's discuss how we can bring your ideas to life.
+            Interested in AI solutions or collaboration opportunities? I'd love to discuss 
+            how we can leverage artificial intelligence to solve your challenges.
           </p>
         </div>
 
@@ -63,13 +63,13 @@ const ContactSection = () => {
                   </Badge>
                 </div>
                 <p className="text-muted-foreground mb-4">
-                  I'm currently available for new projects and collaborations.
-                  Whether you need UI/UX design, a brand refresh, or product consultation, let's discuss your needs.
+                  I'm currently available for AI engineering projects and consulting opportunities.
+                  Whether you need Voice AI solutions, Computer Vision systems, or Generative AI implementations, let's discuss your AI challenges.
                 </p>
                 <div className="space-y-2 text-sm">
                   <p><strong>Response time:</strong> Within 24 hours</p>
-                  <p><strong>Preferred projects:</strong> Web applications, Mobile apps, Design systems</p>
-                  <p><strong>Collaboration style:</strong> Agile, Remote-friendly</p>
+                  <p><strong>Preferred projects:</strong> Voice AI, Computer Vision, RAG Systems, Model Deployment</p>
+                  <p><strong>Collaboration style:</strong> Agile, Remote-friendly, Research-driven</p>
                 </div>
               </Card>
             </div>
@@ -135,18 +135,18 @@ const ContactSection = () => {
         <div className="text-center mt-16 animate-fade-in">
           <Card className="p-8 lg:p-12 bg-gradient-primary text-primary-foreground shadow-elegant">
             <h3 className="text-2xl lg:text-3xl font-serif font-bold mb-4">
-              Ready to Start Your Project?
+              Ready to Start Your AI Project?
             </h3>
             <p className="text-lg opacity-90 mb-8 max-w-2xl mx-auto">
-              Every great project starts with a conversation. Let's discuss your vision 
-              and explore how we can create something amazing together.
+              Every innovative AI solution starts with understanding your challenges. Let's discuss your vision 
+              and explore how we can leverage AI to create transformative solutions together.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button variant="accent" size="lg">
-                Schedule a Call
+                Schedule a Consultation
               </Button>
               <Button variant="elegant" size="lg">
-                View Pricing
+                View AI Services
               </Button>
             </div>
           </Card>

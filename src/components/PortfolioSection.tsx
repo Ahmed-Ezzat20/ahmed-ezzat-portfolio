@@ -14,12 +14,12 @@ const PortfolioSection = () => {
     {
       id: 1,
       title: 'Alzheimer MRI Classifier',
-      description: 'Deep learning architecture for Alzheimer\'s Disease classification using MRI scans. Conducted comprehensive data preprocessing, feature engineering, and hyperparameter tuning.',
+      description: 'Deep learning architecture for Alzheimer\'s Disease classification using MRI scans with comprehensive data preprocessing and hyperparameter tuning.',
       image: projectWebDev,
       category: 'ai',
       technologies: ['Python', 'TensorFlow', 'Deep Learning', 'MRI Analysis', 'Computer Vision'],
-      liveUrl: '#',
-      githubUrl: '#',
+      liveUrl: 'https://github.com/Ahmed-Ezzat20/alzheimer-mri-classifier',
+      githubUrl: 'https://github.com/Ahmed-Ezzat20/alzheimer-mri-classifier',
       results: {
         accuracy: '92% accuracy achieved',
         impact: 'Medical diagnosis support',
@@ -28,13 +28,13 @@ const PortfolioSection = () => {
     },
     {
       id: 2,
-      title: 'Plant Leaf Classification Research',
-      description: 'Published IEEE research on lightweight plant leaf classification using transfer learning. Designed pipeline for real-time classification on edge devices with improved accuracy.',
+      title: 'IEEE Plant Leaf Classification Research',
+      description: 'Published research on lightweight plant leaf classification using transfer learning, designed for real-time classification on edge devices.',
       image: projectBranding,
       category: 'ai',
       technologies: ['Transfer Learning', 'Edge Computing', 'IEEE Publication', 'Computer Vision', 'Research'],
-      liveUrl: '#',
-      githubUrl: '#',
+      liveUrl: 'https://ieeexplore.ieee.org/document/your-paper-id',
+      githubUrl: 'https://github.com/Ahmed-Ezzat20/plant-leaf-classification',
       results: {
         publication: 'IEEE JAC-ECC 2024',
         innovation: 'Transfer learning pipeline',

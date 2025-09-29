@@ -10,10 +10,12 @@ const Navigation = () => {
   const [activeSection, setActiveSection] = useState('home');
 
   const navItems = [
-    { href: '#home', label: 'Home' },
-    { href: '#about', label: 'About' },
-    { href: '#experiences', label: 'Experiences' },
-    { href: '#contact', label: 'Contact' },
+    { href: '#home', label: 'Home', number: '1' },
+    { href: '#about', label: 'About', number: '2' },
+    { href: '#skills', label: 'Skills', number: '3' },
+    { href: '#experiences', label: 'Experience', number: '4' },
+    { href: '#portfolio', label: 'Portfolio', number: '5' },
+    { href: '#contact', label: 'Contact', number: '6' },
   ];
 
   useEffect(() => {
@@ -73,21 +75,25 @@ const Navigation = () => {
           </Button>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-2">
             {navItems.map((item) => (
               <button
                 key={item.href}
                 onClick={() => scrollToSection(item.href)}
-                className={`relative text-sm font-medium transition-smooth hover:text-accent ${
+                className={`relative px-4 py-2 text-sm font-medium transition-smooth rounded-lg border-2 flex items-center gap-2 ${
                   activeSection === item.href.substring(1)
-                    ? 'text-accent'
-                    : 'text-foreground/80'
+                    ? 'border-green-500 bg-green-500/10 text-green-400'
+                    : 'border-gray-600 text-foreground/80 hover:border-gray-500 hover:text-accent'
                 }`}
               >
+                <span className={`w-6 h-6 rounded text-xs flex items-center justify-center font-bold ${
+                  activeSection === item.href.substring(1)
+                    ? 'bg-green-500 text-black'
+                    : 'bg-gray-600 text-white'
+                }`}>
+                  {item.number}
+                </span>
                 {item.label}
-                {activeSection === item.href.substring(1) && (
-                  <div className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-accent rounded-lg md:rounded-full" />
-                )}
               </button>
             ))}
           </div>
@@ -115,12 +121,19 @@ const Navigation = () => {
                 <button
                   key={item.href}
                   onClick={() => scrollToSection(item.href)}
-                  className={`text-left py-2 text-sm font-medium transition-smooth hover:text-accent ${
+                  className={`text-left py-2 px-4 text-sm font-medium transition-smooth rounded-lg border-2 flex items-center gap-2 ${
                     activeSection === item.href.substring(1)
-                      ? 'text-accent'
-                      : 'text-foreground/80'
+                      ? 'border-green-500 bg-green-500/10 text-green-400'
+                      : 'border-gray-600 text-foreground/80 hover:border-gray-500 hover:text-accent'
                   }`}
                 >
+                  <span className={`w-6 h-6 rounded text-xs flex items-center justify-center font-bold ${
+                    activeSection === item.href.substring(1)
+                      ? 'bg-green-500 text-black'
+                      : 'bg-gray-600 text-white'
+                  }`}>
+                    {item.number}
+                  </span>
                   {item.label}
                 </button>
               ))}

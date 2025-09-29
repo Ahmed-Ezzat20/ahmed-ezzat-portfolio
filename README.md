@@ -4,7 +4,7 @@ A modern, responsive portfolio website showcasing my expertise in Artificial Int
 
 ## 🚀 Live Demo
 
-Visit the live portfolio: [Ahmed Ezzat Portfolio](https://your-deployed-url.com)
+Visit the live portfolio: [Ahmed Ezzat Portfolio](https://ahmed-ezzat20.github.io/ahmed-ezzat-portfolio/)
 
 ## 👨‍💻 About Me
 

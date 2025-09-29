@@ -51,83 +51,102 @@ const ContactSection = () => {
         </div>
 
         {/* Contact Information Grid */}
-        <div className="grid lg:grid-cols-2 gap-8 animate-slide-up">
+        <div className="grid lg:grid-cols-2 gap-12 animate-slide-up">
             
-            {/* Left Column - Availability */}
+            {/* Left Column - Contact Info */}
             <div className="order-2 lg:order-1">
-              <Card className="p-8 shadow-card bg-gradient-subtle h-full">
-                <div className="flex items-center justify-between mb-4">
-                  <h3 className="text-xl font-semibold">Availability</h3>
-                  <Badge variant="outline" className="bg-success-soft text-success border-success">
-                    Available
-                  </Badge>
-                </div>
-                <p className="text-muted-foreground mb-4">
-                  I'm currently available for AI engineering projects and consulting opportunities.
-                  Whether you need Voice AI solutions, Computer Vision systems, or Generative AI implementations, let's discuss your AI challenges.
-                </p>
-                <div className="space-y-2 text-sm">
-                  <p><strong>Response time:</strong> Within 24 hours</p>
-                  <p><strong>Preferred projects:</strong> Voice AI, Computer Vision, RAG Systems, Model Deployment</p>
-                  <p><strong>Collaboration style:</strong> Agile, Remote-friendly, Research-driven</p>
-                </div>
-              </Card>
-            </div>
-
-            {/* Right Column - Contact Details and Social Links */}
-            <div className="space-y-8 order-1 lg:order-2">
+              <h3 className="text-2xl font-semibold mb-6">Get in Touch</h3>
+              <p className="text-muted-foreground mb-8">
+                Have a question or a project in mind? Feel free to reach out.
+              </p>
               
               {/* Contact Details */}
-              <Card className="p-8 shadow-card">
-                <h3 className="text-2xl font-serif font-semibold mb-6">Get In Touch</h3>
-                <div className="space-y-6">
-                  {contactInfo.map((item, index) => {
-                    return (
-                      <div key={index} className="flex items-center gap-4">
-                        <div className="w-12 h-12 bg-gradient-accent rounded-full flex items-center justify-center">
-                          <FontAwesomeIcon icon={item.icon} className="h-5 w-5 text-accent-foreground" />
-                        </div>
-                        <div>
-                          <p className="font-medium">{item.label}</p>
-                          <a 
-                            href={item.href} 
-                            className="text-muted-foreground hover:text-accent transition-smooth"
-                          >
-                            {item.value}
-                          </a>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              </Card>
+              <div className="space-y-6 mb-8">
+                {contactInfo.map((contact, index) => (
+                  <div key={index} className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-gradient-accent rounded-lg flex items-center justify-center">
+                      <FontAwesomeIcon icon={contact.icon} className="h-5 w-5 text-accent-foreground" />
+                    </div>
+                    <div>
+                      <p className="font-medium">{contact.label}</p>
+                      <a 
+                        href={contact.href}
+                        className="text-muted-foreground hover:text-accent transition-smooth"
+                      >
+                        {contact.value}
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mb-6">
+                <p className="text-sm text-muted-foreground mb-2">
+                  <strong>Location:</strong> Cairo, Egypt
+                </p>
+              </div>
 
               {/* Social Links */}
-              <Card className="p-8 shadow-card">
-                <h3 className="text-xl font-semibold mb-6">Follow Me</h3>
-                <div className="flex gap-4">
-                  {contactSocialLinks.map((social, index) => {
-                    const linkProps = social.type === 'external' 
-                      ? { target: "_blank", rel: "noopener noreferrer" }
-                      : {};
-                    
-                    return (
-                      <Button
-                        key={index}
-                        variant="ghost"
-                        size="icon"
-                        className="rounded-full hover:shadow-glow hover:bg-accent hover:text-accent-foreground transition-spring"
-                        asChild
-                      >
-                        <a href={social.href} aria-label={social.label} {...linkProps}>
-                          <FontAwesomeIcon icon={social.icon} className="h-5 w-5" />
-                        </a>
-                      </Button>
-                    );
-                  })}
-                </div>
-              </Card>
+              <div className="flex gap-4">
+                {contactSocialLinks.map((social, index) => {
+                  const linkProps = social.type === 'external'
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {};
 
+                  return (
+                    <Button
+                      key={index}
+                      variant="ghost"
+                      size="icon"
+                      className="rounded-full hover:shadow-glow w-12 h-12"
+                      asChild
+                    >
+                      <a href={social.href} aria-label={social.label} {...linkProps}>
+                        <FontAwesomeIcon icon={social.icon} className="h-5 w-5" />
+                      </a>
+                    </Button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Right Column - Contact Form */}
+            <div className="space-y-6 order-1 lg:order-2">
+              <Card className="p-8 shadow-card">
+                <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
+                <form className="space-y-6">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Name"
+                      className="w-full px-4 py-3 bg-background border-2 border-red-500 rounded-lg focus:border-red-400 focus:outline-none transition-colors text-white placeholder-gray-400"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Email"
+                      className="w-full px-4 py-3 bg-background border-2 border-green-500 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-white placeholder-gray-400"
+                      required
+                    />
+                  </div>
+                  <div>
+                    <textarea
+                      placeholder="Message"
+                      rows={6}
+                      className="w-full px-4 py-3 bg-background border-2 border-blue-500 rounded-lg focus:border-blue-400 focus:outline-none transition-colors text-white placeholder-gray-400 resize-none"
+                      required
+                    />
+                  </div>
+                  <Button 
+                    type="submit"
+                    className="w-full py-3 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-black font-semibold rounded-lg transition-all"
+                  >
+                    Submit
+                  </Button>
+                </form>
+              </Card>
             </div>
         </div>
 

@@ -1,6 +1,6 @@
 # Ahmed Ezzat - AI Engineer Portfolio
 
-A modern, responsive portfolio website showcasing my expertise in Artificial Intelligence, Computer Vision, and Generative AI.
+A modern, responsive portfolio website showcasing my expertise in Artificial Intelligence, Computer Vision, and Generative AI. Updated with correct social media links.
 
 ## 🚀 Live Demo
 

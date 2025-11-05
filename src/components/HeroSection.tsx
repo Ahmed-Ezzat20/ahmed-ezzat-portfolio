@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons';
@@ -6,6 +6,36 @@ import professionalHeadshot from '@/assets/ahmed-headshot.png';
 import { socialLinks } from '@/constants/socialLinks';
 
 const HeroSection = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const [typedText, setTypedText] = useState('');
+  const fullText = 'AI Engineer';
+  const typingSpeed = 150; // milliseconds per character
+
+  // Typing animation effect
+  useEffect(() => {
+    let currentIndex = 0;
+    const typingInterval = setInterval(() => {
+      if (currentIndex <= fullText.length) {
+        setTypedText(fullText.slice(0, currentIndex));
+        currentIndex++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, typingSpeed);
+
+    return () => clearInterval(typingInterval);
+  }, []);
+
+  // Parallax effect on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   const scrollToPortfolio = () => {
     document.querySelector('#portfolio')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -19,7 +49,13 @@ const HeroSection = () => {
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-subtle opacity-50" />
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div
+        className="container mx-auto px-6 relative z-10"
+        style={{
+          transform: `translateY(${scrollY * 0.3}px)`,
+          transition: 'transform 0.1s ease-out',
+        }}
+      >
         <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
 
           {/* Content */}
@@ -27,11 +63,14 @@ const HeroSection = () => {
             <div className="mb-6">
               <h1 className="text-5xl lg:text-7xl font-serif font-bold mb-4">
                 <span className="text-slate-800 dark:text-slate-100">
-                  Ahmed Ezzat 
-                </span>               
+                  Ahmed Ezzat
+                </span>
               </h1>
               <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-4">
-                <span className="text-slate-600 dark:text-slate-300">AI Engineer</span>
+                <span className="text-slate-600 dark:text-slate-300">
+                  {typedText}
+                  <span className="animate-pulse text-accent">|</span>
+                </span>
               </h2>
               <p className="text-xl lg:text-2xl text-muted-foreground mb-8 max-w-2xl">
                 Building Voice AI Solutions and specializing in Computer Vision & Generative AI. 
@@ -106,16 +145,19 @@ const HeroSection = () => {
         </div>
       </div>
 
-      {/* Scroll indicator */}
+      {/* Enhanced Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={scrollToPortfolio}
-          className="rounded-full"
-        >
-          <FontAwesomeIcon icon={faArrowDown} className="h-5 w-5" />
-        </Button>
+        <div className="flex flex-col items-center gap-2">
+          <p className="text-sm text-muted-foreground font-medium">Scroll to explore</p>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={scrollToPortfolio}
+            className="rounded-full hover:shadow-glow hover:bg-accent/10 transition-all duration-300 w-12 h-12"
+          >
+            <FontAwesomeIcon icon={faArrowDown} className="h-5 w-5 text-accent" />
+          </Button>
+        </div>
       </div>
     </section>
   );

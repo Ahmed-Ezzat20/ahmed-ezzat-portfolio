@@ -1,12 +1,52 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faPhone, faLocationDot } from '@fortawesome/free-solid-svg-icons';
 import { socialLinks, xLink } from '@/constants/socialLinks';
+import { toast } from '@/components/ui/sonner';
 
 const ContactSection = () => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Simulate form submission (replace with actual API call)
+    try {
+      await new Promise(resolve => setTimeout(resolve, 1500));
+
+      toast.success('Message sent successfully!', {
+        description: "Thank you for reaching out. I'll get back to you soon.",
+        duration: 5000,
+      });
+
+      // Reset form
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      toast.error('Failed to send message', {
+        description: 'Please try again or contact me directly via email.',
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
 
   const contactInfo = [
@@ -114,36 +154,59 @@ const ContactSection = () => {
             <div className="space-y-6 order-1 lg:order-2">
               <Card className="p-8 shadow-card">
                 <h3 className="text-2xl font-semibold mb-6">Send a Message</h3>
-                <form className="space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
                     <input
                       type="text"
+                      name="name"
                       placeholder="Name"
-                      className="w-full px-4 py-3 bg-background border-2 border-red-500 rounded-lg focus:border-red-400 focus:outline-none transition-colors text-white placeholder-gray-400"
+                      value={formData.name}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-card border-2 border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-smooth text-foreground placeholder:text-muted-foreground"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div>
                     <input
                       type="email"
+                      name="email"
                       placeholder="Email"
-                      className="w-full px-4 py-3 bg-background border-2 border-green-500 rounded-lg focus:border-green-400 focus:outline-none transition-colors text-white placeholder-gray-400"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-card border-2 border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-smooth text-foreground placeholder:text-muted-foreground"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
                   <div>
                     <textarea
+                      name="message"
                       placeholder="Message"
                       rows={6}
-                      className="w-full px-4 py-3 bg-background border-2 border-blue-500 rounded-lg focus:border-blue-400 focus:outline-none transition-colors text-white placeholder-gray-400 resize-none"
+                      value={formData.message}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 bg-card border-2 border-border rounded-lg focus:border-primary focus:ring-2 focus:ring-primary/20 focus:outline-none transition-smooth text-foreground placeholder:text-muted-foreground resize-none"
                       required
+                      disabled={isSubmitting}
                     />
                   </div>
-                  <Button 
+                  <Button
                     type="submit"
-                    className="w-full py-3 bg-gradient-to-r from-orange-500 to-yellow-500 hover:from-orange-600 hover:to-yellow-600 text-black font-semibold rounded-lg transition-all"
+                    className="w-full py-3 bg-gradient-accent hover:shadow-glow text-accent-foreground font-semibold rounded-lg transition-smooth disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={isSubmitting}
                   >
-                    Submit
+                    {isSubmitting ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg className="animate-spin h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </span>
+                    ) : (
+                      'Send Message'
+                    )}
                   </Button>
                 </form>
               </Card>

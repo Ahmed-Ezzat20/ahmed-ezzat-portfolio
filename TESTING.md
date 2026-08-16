@@ -20,3 +20,7 @@ The redesigned page reflects the supplied CV, including the hams.ai TTS Lead rol
 The production portfolio was published to the `gh-pages` branch and verified at `https://ahmed-ezzat20.github.io/ahmed-ezzat-portfolio/?v=terminal-2026`. The live hero rendered the terminal theme and exposed the GitHub, LinkedIn, email, Scholar, experience, contact, and CV controls. The CV button was clicked successfully and opened `https://ahmed-ezzat20.github.io/ahmed-ezzat-portfolio/Ahmed_Ezzat_CV.pdf`, confirming that the supplied two-page CV is publicly accessible from the portfolio.
 
 The live LinkedIn control was also clicked successfully. LinkedIn presented its public authentication wall, while preserving the intended destination in `sessionRedirect=https://www.linkedin.com/in/mrezzat/`; this verifies that the portfolio now uses the confirmed LinkedIn URL rather than the prior incorrect profile.
+
+## Blog verification
+
+The local Voice AI Signal portfolio was reviewed after adding the blog section. The page displays a dedicated **Field Notes** area with a featured Voice AI article, two additional article cards, topic and reading-time metadata, and a visual waveform treatment that matches the overall portfolio design. The navigation includes a Blog destination. Automated interaction coverage verified that selecting **Read note** opens the featured article reader and displays its article content.

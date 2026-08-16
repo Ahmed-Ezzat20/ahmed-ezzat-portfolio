@@ -2,10 +2,11 @@ import { cleanup, render, screen } from '@testing-library/react';
 import HeroSection from './HeroSection';
 import ContactSection from './ContactSection';
 import PortfolioSection from './PortfolioSection';
+import BlogSection from './BlogSection';
 
 afterEach(cleanup);
 
-describe('terminal portfolio content', () => {
+describe('Voice AI Signal portfolio content', () => {
   it('renders all verified social links in the hero', () => {
     render(<HeroSection />);
 
@@ -36,5 +37,16 @@ describe('terminal portfolio content', () => {
     expect(screen.getByText(/Large-Scale Saudi Arabic Speech Corpus/i)).toBeTruthy();
     expect(screen.getByText(/Real-Time Audio Chat with Voice AI/i)).toBeTruthy();
     expect(screen.getByText(/EgyLens/i)).toBeTruthy();
+  });
+
+  it('renders the Voice AI blog and opens the featured article', async () => {
+    const { userEvent } = await import('@testing-library/user-event');
+    const user = userEvent.setup();
+    render(<BlogSection />);
+
+    expect(screen.getByText(/Notes from building Arabic Voice AI systems/i)).toBeTruthy();
+    await user.click(screen.getByRole('button', { name: /Read note/i }));
+    expect(screen.getByRole('dialog', { name: /Latency is a product decision/i })).toBeTruthy();
+    expect(screen.getByText(/Why response time changes the conversation/i)).toBeTruthy();
   });
 });

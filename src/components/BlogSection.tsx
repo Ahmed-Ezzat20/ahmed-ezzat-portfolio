@@ -1,285 +1,84 @@
-import React, { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { Calendar, Clock, ArrowRight, BookOpen, X } from 'lucide-react';
-
-interface Article {
-  title: string;
-  excerpt: string;
-  category: string;
-  readTime: string;
-  publishDate: string;
-  content: string;
-  featured?: boolean;
-}
+import { useEffect, useState } from 'react';
+import { ArrowUpRight, AudioLines, BookOpen, CalendarDays, Clock3, X } from 'lucide-react';
+import { blogPosts, type BlogPost } from '@/content/blogPosts';
 
 const BlogSection = () => {
-  const featuredPost = {
-    title: 'Designing Accessible Interfaces: Best Practices for 2024',
-    excerpt: 'Explore key principles and practical tips for crafting inclusive, accessible digital products that delight every user.',
-    category: 'Design',
-    readTime: '7 min read',
-    publishDate: 'December 15, 2024',
-    featured: true,
-    content: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris viverra veniam sit amet lacus cursus de congue. Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis.
+  const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
 
-    Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedPost(null);
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, []);
 
-    Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.
+  useEffect(() => {
+    document.body.style.overflow = selectedPost ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [selectedPost]);
 
-    Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.`
-  };
-
-  const posts = [
-    {
-      title: 'The Art of Micro-Interactions in Modern Web Design',
-      excerpt: 'How subtle animations and feedback can dramatically improve user experience and engagement.',
-      category: 'Design',
-      readTime: '5 min read',
-      publishDate: 'December 10, 2024',
-      content: `Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est.
-
-      Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci.
-
-      Sagittis tempus lacus enim ac dui. Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue, eu vulputate magna eros eu erat. Aliquam erat volutpat.
-
-      Nam dui mi, tincidunt quis, accumsan porttitor, facilisis luctus, metus. Phasellus ultrices nulla quis nibh. Quisque a lectus. Donec consectetuer ligula vulputate sem tristique cursus.`
-    },
-    {
-      title: 'Creating Cohesive Design Systems',
-      excerpt: 'Techniques for building scalable design systems that empower teams and ensure brand consistency.',
-      category: 'Design',
-      readTime: '6 min read',
-      publishDate: 'December 5, 2024',
-      content: `Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. Nullam quis risus eget urna mollis ornare vel eu leo.
-
-      Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-
-      Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Maecenas sed diam eget risus varius blandit sit amet non magna.
-
-      Nullam id dolor id nibh ultricies vehicula ut id elit. Sed posuere consectetur est at lobortis. Aenean lacinia bibendum nulla sed consectetur. Cras mattis consectetur purus sit amet fermentum.`
-    },
-    {
-      title: 'Mobile-First Design: Beyond Responsive',
-      excerpt: 'Why mobile-first thinking is essential for modern web applications and how to implement it effectively.',
-      category: 'Design',
-      readTime: '7 min read',
-      publishDate: 'November 28, 2024',
-      content: `Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-
-      Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Sed posuere consectetur est at lobortis. Maecenas faucibus mollis interdum. Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-
-      Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Donec id elit non mi porta gravida at eget metus. Cras mattis consectetur purus sit amet fermentum.
-
-      Etiam porta sem malesuada magna mollis euismod. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.`
-    },
-    {
-      title: 'Performance Optimization Strategies',
-      excerpt: 'Proven techniques to improve your web application performance and user experience.',
-      category: 'Performance',
-      readTime: '9 min read',
-      publishDate: 'November 20, 2024',
-      content: `Suspendisse potenti. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam.
-
-      Vivamus pretium ornare est. Ut hendrerit tincidunt lorem. Sed vitae turpis a pede ullamcorper luctus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
-
-      Ut non enim eleifend felis pretium feugiat. Vivamus quis mi. Phasellus a est. Phasellus magna. In hac habitasse platea dictumst. Curabitur at lacus ac velit ornare lobortis.
-
-      Curabitur a felis in nunc fringilla tristique. Morbi mattis ullamcorper velit. Phasellus gravida semper nisi. Nullam vel sem. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam.`
-    },
-  ];
-
-  const [filter, setFilter] = useState('All');
-  const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const categories = ['All', 'Development', 'Design', 'Performance', 'Career'];
-  
-  const openArticle = (article: Article) => {
-    setSelectedArticle(article);
-    setIsModalOpen(true);
-  };
-  
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setSelectedArticle(null);
-  };
-
-  const filteredPosts = filter === 'All'
-    ? posts
-    : posts.filter(post => post.category === filter);
+  const featured = blogPosts.find((post) => post.featured) ?? blogPosts[0];
+  const remainingPosts = blogPosts.filter((post) => post.slug !== featured.slug);
 
   return (
-    <section id="blog" className="py-20 bg-gradient-subtle">
-      <div className="container mx-auto px-6">
-        
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
-            My <span className="text-accent-gradient">Blog</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Sharing knowledge, experiences, and insights from the world of development 
-            and design. Let's learn and grow together.
-          </p>
+    <section id="blog" className="px-6 py-24 md:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <p className="eyebrow">05 · Field notes</p>
+            <h2 className="section-heading mt-4">Notes from building Arabic Voice AI systems.</h2>
+            <p className="section-copy mt-5">Practical thoughts on speech data, low-latency inference, real-time agents, and the work between research and deployment.</p>
+          </div>
+          <span className="inline-flex w-fit items-center gap-2 rounded-full border border-cyan-100/10 px-4 py-2 text-xs text-slate-400"><AudioLines className="h-3.5 w-3.5 text-cyan-200" /> New notes will appear here</span>
         </div>
 
-        {/* Featured Post */}
-        <Card className="mb-12 overflow-hidden shadow-elegant hover:shadow-glow transition-smooth animate-slide-up cursor-pointer" onClick={() => openArticle(featuredPost)}>
-          <div className="p-8 lg:p-12">
-            <div className="flex items-center gap-4 mb-4">
-              <Badge variant="outline" className="bg-gradient-accent text-accent-foreground">
-                Featured
-              </Badge>
-              <Badge variant="secondary">
-                {featuredPost.category}
-              </Badge>
-            </div>
-            
-            <h3 className="text-3xl lg:text-4xl font-serif font-bold mb-4 text-gradient">
-              {featuredPost.title}
-            </h3>
-            
-            <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
-              {featuredPost.excerpt}
-            </p>
-            
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mt-auto">
-              <div className="flex items-center gap-6 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4" />
-                  {featuredPost.publishDate}
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4" />
-                  {featuredPost.readTime}
-                </div>
+        <article className="signal-card mt-12 grid overflow-hidden rounded-3xl md:grid-cols-[1.05fr_.95fr]">
+          <div className="relative min-h-60 overflow-hidden bg-gradient-to-br from-cyan-300/20 via-sky-500/10 to-transparent p-7 md:min-h-full md:p-9">
+            <div className="signal-ring -left-12 -top-16 h-72 w-72" />
+            <div className="signal-ring left-10 top-10 h-44 w-44 border-cyan-200/20" />
+            <div className="relative flex h-full flex-col justify-between">
+              <span className="inline-flex w-fit rounded-full border border-cyan-100/15 bg-slate-950/20 px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.13em] text-cyan-100">Featured note</span>
+              <div className="mt-16 flex items-end gap-1.5">
+                {[24, 52, 38, 76, 48, 92, 55, 31, 67, 43, 82, 36, 58, 28].map((height, index) => <span key={index} className="wave-bar w-1.5 rounded-full bg-cyan-200" style={{ height: `${height}px`, animationDelay: `${index * 0.09}s` }} />)}
               </div>
-              
-              <Button variant="accent" className="group self-start sm:self-auto">
-                Read Article
-                <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </Button>
             </div>
           </div>
-        </Card>
+          <div className="p-7 md:p-9">
+            <div className="flex flex-wrap gap-3 text-xs text-slate-500"><span className="text-cyan-200">{featured.category}</span><span>·</span><span>{featured.publishedAt}</span><span>·</span><span>{featured.readingTime}</span></div>
+            <h3 className="mt-5 font-display text-2xl font-bold tracking-[-0.04em] text-slate-50 md:text-3xl">{featured.title}</h3>
+            <p className="mt-4 text-sm leading-7 text-slate-400">{featured.excerpt}</p>
+            <button onClick={() => setSelectedPost(featured)} className="mt-7 inline-flex items-center gap-2 text-sm font-semibold text-cyan-100 transition-colors hover:text-cyan-200">Read note <ArrowUpRight className="h-4 w-4" /></button>
+          </div>
+        </article>
 
-        {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          {categories.map((categoryName) => (
-            <Button
-              key={categoryName}
-              variant={filter === categoryName ? 'accent' : 'minimal'}
-              onClick={() => setFilter(categoryName)}
-              className="transition-spring"
-            >
-              {categoryName}
-            </Button>
+        <div className="mt-5 grid gap-5 md:grid-cols-2">
+          {remainingPosts.map((post) => (
+            <article key={post.slug} className="signal-card flex flex-col rounded-3xl p-6 md:p-7">
+              <div className="flex items-center justify-between text-xs"><span className="rounded-full bg-cyan-300/10 px-3 py-1.5 text-cyan-100">{post.category}</span><span className="text-slate-500">{post.readingTime}</span></div>
+              <h3 className="mt-7 font-display text-xl font-bold tracking-[-0.035em] text-slate-50">{post.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-slate-400">{post.excerpt}</p>
+              <div className="mt-auto flex items-center justify-between pt-7"><span className="text-xs text-slate-500">{post.publishedAt}</span><button onClick={() => setSelectedPost(post)} className="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-100 transition-colors hover:text-cyan-200">Read <ArrowUpRight className="h-4 w-4" /></button></div>
+            </article>
           ))}
         </div>
 
-        {/* Recent Posts Grid */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {filteredPosts.map((post, index) => (
-            <Card 
-              key={index} 
-              className="p-6 shadow-card hover:shadow-elegant transition-smooth animate-fade-in group cursor-pointer flex flex-col h-full"
-              style={{ animationDelay: `${index * 0.1}s` }}
-              onClick={() => openArticle(post)}
-            >
-              <div className="mb-4">
-                <Badge variant="secondary" className="mb-3">
-                  {post.category}
-                </Badge>
-                <h4 className="text-xl font-serif font-semibold mb-3 group-hover:text-accent transition-smooth">
-                  {post.title}
-                </h4>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {post.excerpt}
-                </p>
-              </div>
-              
-              <div className="flex items-center justify-between mt-auto">
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="h-3 w-3" />
-                    {post.publishDate}
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Clock className="h-3 w-3" />
-                    {post.readTime}
-                  </div>
-                </div>
-                
-                <ArrowRight className="h-4 w-4 text-accent opacity-0 group-hover:opacity-100 transition-smooth" />
-              </div>
-            </Card>
-          ))}
-        </div>
-
-        {/* Coming Soon */}
-        <Card className="p-8 lg:p-12 text-center shadow-card bg-gradient-primary text-primary-foreground animate-fade-in">
-          <div className="max-w-2xl mx-auto">
-            <BookOpen className="h-12 w-12 mx-auto mb-6 opacity-80" />
-            <h3 className="text-2xl lg:text-3xl font-serif font-bold mb-4">
-              Coming Soon
-            </h3>
-            <p className="text-lg opacity-90 mb-8">
-              Newsletter subscription and new articles are coming soon. 
-              Stay tuned for exciting updates and insights!
-            </p>
-          </div>
-        </Card>
-
-        {/* Article Modal */}
-        <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-          <DialogContent className="max-w-5xl max-h-[85vh] overflow-hidden p-0 gap-0 flex flex-col">
-            <div className="bg-background border-b flex-shrink-0">
-              <DialogHeader className="p-8 pb-6">
-                {selectedArticle && (
-                  <div className="text-left space-y-6">
-                    <div className="flex items-center gap-4">
-                      {selectedArticle.featured && (
-                        <Badge variant="outline" className="bg-gradient-accent text-accent-foreground px-3 py-1">
-                          Featured
-                        </Badge>
-                      )}
-                      <Badge variant="secondary" className="px-3 py-1">
-                        {selectedArticle.category}
-                      </Badge>
-                    </div>
-                    
-                    <DialogTitle className="text-3xl lg:text-4xl font-serif font-bold text-gradient text-left leading-tight">
-                      {selectedArticle.title}
-                    </DialogTitle>
-                    
-                    <div className="flex items-center gap-8 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4" />
-                        <span>{selectedArticle.publishDate}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
-                        <span>{selectedArticle.readTime}</span>
-                      </div>
-                    </div>
-                  </div>
-                )}
-              </DialogHeader>
-            </div>
-            
-            {selectedArticle && (
-              <div className="flex-1 overflow-y-auto px-8 py-6">
-                <div className="text-lg text-muted-foreground leading-relaxed whitespace-pre-line">
-                  {selectedArticle.content}
-                </div>
-              </div>
-            )}
-          </DialogContent>
-        </Dialog>
+        <div className="mt-7 flex items-center gap-3 rounded-2xl border border-cyan-100/10 bg-cyan-300/[0.035] px-5 py-4 text-sm leading-6 text-slate-400"><BookOpen className="h-5 w-5 shrink-0 text-cyan-200" /> Posts are stored in a single editable content file, so new writing can be added without changing the layout.</div>
       </div>
+
+      {selectedPost && (
+        <div className="fixed inset-0 z-[100] flex items-end bg-slate-950/75 p-0 backdrop-blur-sm md:items-center md:justify-center md:p-6" role="dialog" aria-modal="true" aria-label={selectedPost.title}>
+          <button className="absolute inset-0 cursor-default" aria-label="Close article" onClick={() => setSelectedPost(null)} />
+          <article className="relative max-h-[92vh] w-full max-w-3xl overflow-y-auto rounded-t-3xl border border-cyan-100/15 bg-[#0d2238] p-6 shadow-2xl md:rounded-3xl md:p-10">
+            <button onClick={() => setSelectedPost(null)} className="absolute right-5 top-5 rounded-full border border-cyan-100/10 p-2 text-slate-400 transition-colors hover:text-cyan-100" aria-label="Close article"><X className="h-4 w-4" /></button>
+            <div className="pr-10"><p className="eyebrow">{selectedPost.category}</p><h3 className="mt-4 font-display text-3xl font-bold tracking-[-0.05em] text-slate-50 md:text-4xl">{selectedPost.title}</h3></div>
+            <div className="mt-6 flex flex-wrap items-center gap-3 text-xs text-slate-500"><span className="inline-flex items-center gap-1.5"><CalendarDays className="h-3.5 w-3.5" />{selectedPost.publishedAt}</span><span className="inline-flex items-center gap-1.5"><Clock3 className="h-3.5 w-3.5" />{selectedPost.readingTime}</span></div>
+            <div className="mt-9 space-y-8">
+              {selectedPost.sections.map((section) => <div key={section.heading}><h4 className="font-display text-xl font-bold tracking-[-0.03em] text-cyan-100">{section.heading}</h4><div className="mt-3 space-y-4 text-[15px] leading-7 text-slate-300">{section.paragraphs.map((paragraph) => <p key={paragraph}>{paragraph}</p>)}</div></div>)}
+            </div>
+          </article>
+        </div>
+      )}
     </section>
   );
 };

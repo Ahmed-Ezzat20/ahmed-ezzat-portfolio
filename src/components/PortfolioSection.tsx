@@ -1,100 +1,62 @@
-import { ExternalLink, Github, Database, Radio, Eye, FileText } from 'lucide-react';
+import { ArrowUpRight, BookOpenText, FolderGit2, Headphones, MessageSquareMore } from 'lucide-react';
 
 const PortfolioSection = () => {
   const projects = [
     {
-      type: 'DATASET / 2026',
+      type: 'Dataset · 2026',
       title: 'Large-Scale Saudi Arabic Speech Corpus',
-      description: 'Designed and executed the full data pipeline for a 1,368-hour Saudi/Khaleeji Arabic corpus. Built for TTS and ASR with source curation, multi-engine transcription with CER-based quality control, diacritization, and dialect annotation.',
-      stack: ['Arabic Speech', 'ASR', 'TTS', 'Quality Control', 'Diacritization'],
+      description: 'An end-to-end 1,368-hour Saudi/Khaleeji Arabic corpus pipeline for ASR and TTS. The work spans source curation, multi-engine transcription, CER-driven QA, diacritization, and dialect annotation.',
       metric: '1,368h',
       metricLabel: 'curated speech',
-      icon: Database,
-      accent: 'text-green-400',
+      icon: Headphones,
+      tags: ['Arabic speech', 'ASR', 'TTS', 'Quality control'],
     },
     {
-      type: 'APPLICATION / 2025',
+      type: 'Application · 2025',
       title: 'Real-Time Audio Chat with Voice AI',
-      description: 'Production-ready voice agent integrating VAD, Whisper Large v3 Turbo for STT, Qwen 3 for LLM reasoning, and Resemble AI Chatterbox for TTS over WebRTC—plus low-latency streaming and barge-in for natural interruption handling.',
-      stack: ['WebRTC', 'VAD', 'Whisper', 'Qwen 3', 'Chatterbox TTS'],
-      metric: 'Real-time',
+      description: 'A conversational voice experience combining VAD, Whisper Large v3 Turbo, Qwen 3 reasoning, and Chatterbox TTS over WebRTC, with streaming and barge-in for natural interruptions.',
+      metric: 'Live',
       metricLabel: 'voice interaction',
-      icon: Radio,
-      accent: 'text-cyan-400',
+      icon: MessageSquareMore,
+      tags: ['WebRTC', 'Whisper', 'Qwen 3', 'Chatterbox TTS'],
     },
     {
-      type: 'RESEARCH / 2025',
+      type: 'Research · 2025',
       title: 'EgyLens — VQA for Egyptian Arabic',
-      description: 'Fine-tuned Google’s Gemma 3n on Egyptian Arabic visual-question-answering datasets to enable on-device, privacy-preserving visual understanding with offline inference.',
-      stack: ['Gemma 3n', 'VQA', 'Egyptian Arabic', 'On-device AI'],
+      description: 'Fine-tuned Google Gemma 3n for Egyptian Arabic visual question answering, with a focus on privacy-preserving, on-device visual understanding and offline inference.',
       metric: 'Offline',
       metricLabel: 'private inference',
-      icon: Eye,
-      accent: 'text-purple-400',
-    },
-    {
-      type: 'PUBLICATION / 2024',
-      title: 'Lightweight Plant Leaf Classification',
-      description: 'IEEE publication evaluating lightweight transfer-learning models for on-device plant species identification, designed for practical, resource-aware deployment.',
-      stack: ['Transfer Learning', 'Computer Vision', 'Edge AI', 'IEEE'],
-      metric: 'IEEE',
-      metricLabel: 'JAC-ECC 2024',
-      icon: FileText,
-      accent: 'text-yellow-400',
-      href: 'https://doi.org/10.1109/JAC-ECC64419.2024.11061212',
+      icon: FolderGit2,
+      tags: ['Gemma 3n', 'VQA', 'Egyptian Arabic', 'Edge AI'],
     },
   ];
 
   return (
-    <section id="projects" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-12">
-          <p className="text-gray-500 font-mono text-sm mb-2">
-            <span className="text-green-400">$</span> find ./projects -type f -maxdepth 2
-          </p>
-          <h2 className="text-3xl md:text-4xl font-mono font-bold neon-text">
-            # Selected Projects
-          </h2>
+    <section id="projects" className="px-6 py-24 md:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
+          <div className="max-w-2xl">
+            <p className="eyebrow">04 · Selected work</p>
+            <h2 className="section-heading mt-4">A few systems built for Arabic intelligence in the real world.</h2>
+          </div>
+          <a href="https://github.com/Ahmed-Ezzat20" target="_blank" rel="noopener noreferrer" className="inline-flex w-fit items-center gap-2 text-sm font-semibold text-cyan-100 transition-colors hover:text-cyan-200">View GitHub <ArrowUpRight className="h-4 w-4" /></a>
         </div>
 
-        <div className="grid gap-5">
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
           {projects.map((project) => {
             const Icon = project.icon;
             return (
-              <article key={project.title} className="code-block card-glow group">
-                <div className="flex flex-col gap-5 md:flex-row md:justify-between">
-                  <div className="min-w-0">
-                    <div className="flex flex-wrap items-center gap-3 mb-3">
-                      <Icon className={`w-4 h-4 ${project.accent}`} />
-                      <p className="text-[11px] tracking-wider text-gray-500 font-mono">{project.type}</p>
-                    </div>
-                    <h3 className="font-mono text-lg md:text-xl text-gray-100 group-hover:text-green-300 transition-colors">
-                      {project.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-relaxed text-gray-400">
-                      {project.description}
-                    </p>
-                    <div className="mt-5 flex flex-wrap gap-2">
-                      {project.stack.map((item) => (
-                        <span key={item} className="px-2 py-1 rounded text-[11px] font-mono bg-black/60 border border-gray-800 text-gray-400">
-                          {item}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="shrink-0 md:text-right">
-                    <p className={`text-xl font-mono font-bold ${project.accent}`}>{project.metric}</p>
-                    <p className="mt-1 text-[10px] uppercase tracking-wider text-gray-600">{project.metricLabel}</p>
-                    {project.href && (
-                      <a
-                        href={project.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 mt-5 font-mono text-xs text-gray-500 hover:text-green-400 transition-colors"
-                      >
-                        view_paper <ExternalLink className="w-3 h-3" />
-                      </a>
-                    )}
+              <article key={project.title} className="signal-card flex min-h-[350px] flex-col rounded-3xl p-6 md:p-7">
+                <div className="flex items-start justify-between">
+                  <span className="rounded-xl bg-cyan-300/10 p-3 text-cyan-200"><Icon className="h-5 w-5" /></span>
+                  <span className="font-mono text-[10px] uppercase tracking-[0.13em] text-slate-500">{project.type}</span>
+                </div>
+                <h3 className="mt-8 font-display text-xl font-bold tracking-[-0.035em] text-slate-50">{project.title}</h3>
+                <p className="mt-3 text-sm leading-6 text-slate-400">{project.description}</p>
+                <div className="mt-auto pt-7">
+                  <div className="flex items-end justify-between border-t border-cyan-100/10 pt-5">
+                    <div><p className="metric-value text-2xl">{project.metric}</p><p className="mt-1 text-xs text-slate-500">{project.metricLabel}</p></div>
+                    <div className="flex flex-wrap justify-end gap-1.5 max-w-[180px]">{project.tags.map((tag) => <span key={tag} className="rounded-full bg-slate-950/30 px-2 py-1 text-[10px] text-slate-400">{tag}</span>)}</div>
                   </div>
                 </div>
               </article>
@@ -102,23 +64,9 @@ const PortfolioSection = () => {
           })}
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-4">
-          <a
-            href="https://github.com/Ahmed-Ezzat20"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 border border-green-700 text-green-400 font-mono text-sm rounded hover:bg-green-500/10 hover:border-green-400 transition-all"
-          >
-            <Github className="w-4 h-4" /> git clone github.com/Ahmed-Ezzat20
-          </a>
-          <a
-            href="https://scholar.google.com/citations?user=5OHfOSgAAAAJ&hl=en"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-700 text-gray-400 font-mono text-sm rounded hover:border-cyan-500 hover:text-cyan-400 transition-all"
-          >
-            <ExternalLink className="w-4 h-4" /> open publications
-          </a>
+        <div className="mt-7 flex items-center gap-3 rounded-2xl border border-cyan-100/10 bg-cyan-300/[0.035] px-5 py-4">
+          <BookOpenText className="h-5 w-5 text-cyan-200" />
+          <p className="text-sm text-slate-400">Published research: <a className="text-cyan-100 underline decoration-cyan-300/30 underline-offset-4 hover:text-cyan-200" href="https://doi.org/10.1109/JAC-ECC64419.2024.11061212" target="_blank" rel="noopener noreferrer">Lightweight Plant Leaf Classification Based on Transfer Learning</a>, IEEE JAC-ECC 2024.</p>
         </div>
       </div>
     </section>

@@ -1,103 +1,71 @@
+import { ArrowUpRight } from 'lucide-react';
+
 const ExperienceTimeline = () => {
-  const experience = [
+  const roles = [
     {
-      date: 'Feb 2026 — Present',
-      role: 'AI Engineer · TTS Lead, Voice AI Team',
+      period: 'Feb 2026 — Present',
+      title: 'AI Engineer · TTS Lead, Voice AI Team',
       company: 'hams.ai',
-      status: 'RUNNING',
-      points: [
-        'Built and operate Hams Turbo TTS, a real-time Saudi Arabic text-to-speech system for enterprise voice agents.',
-        'Fine-tuned F5-TTS across multiple model generations on approximately 13,600 hours of Saudi Arabic speech.',
-        'Delivered approximately 9× combined inference speedup through pruned-step sampling and a custom TensorRT FP16 backend.',
-        'Achieved 154ms mean and 253ms p95 time-to-first-audio in production, with RTF 0.03–0.05.',
-        'Own production infrastructure including Docker, TensorRT, NVIDIA L4 and zero-downtime deployment cutovers.',
-      ],
+      highlight: 'Production Saudi Arabic TTS',
+      summary: 'Leading the development and operation of Hams Turbo TTS, a production streaming system for live enterprise voice agents.',
+      outcomes: ['Fine-tuned F5-TTS on approximately 13,600 hours of speech.', 'Achieved 154ms mean time-to-first-audio with RTF 0.03–0.05.', 'Delivered ~9× combined speedup through pruned sampling and TensorRT FP16.'],
     },
     {
-      date: 'Sep 2025 — Jan 2026',
-      role: 'AI Engineer',
+      period: 'Sep 2025 — Jan 2026',
+      title: 'AI Engineer',
       company: 'GenArabia',
-      status: 'COMPLETED',
-      points: [
-        'Fine-tuned Spark-TTS for Arabic on a 150-hour dataset using H100 GPUs, including diacritic handling and publishing.',
-        'Fine-tuned Whisper Large V3 and NVIDIA Parakeet-TDT for air-traffic-control communication, reducing WER by 60%.',
-        'Designed a synthetic speech-data pipeline for telecom use cases including telephone-code simulation and domain-specific training.',
-        'Engineered production speech-processing pipelines for TTS and STT systems with serverless deployment and Modal FastAPI endpoints.',
-      ],
+      highlight: 'Arabic TTS & ATC transcription',
+      summary: 'Built production speech workflows for Arabic model adaptation, telecom data generation, and air-traffic-control transcription.',
+      outcomes: ['Fine-tuned Spark-TTS for Arabic on a 150-hour curated dataset.', 'Reduced ATC word error rate by 60% with Whisper Large V3 and NVIDIA Parakeet.', 'Designed synthetic speech-data pipelines and deployable FastAPI endpoints.'],
     },
     {
-      date: 'Jun 2025 — Aug 2025',
-      role: 'AI Engineer',
+      period: 'Jun 2025 — Aug 2025',
+      title: 'AI Engineer',
       company: 'Andalusi',
-      status: 'COMPLETED',
-      points: [
-        'Delivered a quantized background-removal model with a 75% size reduction for mobile and edge deployment.',
-        'Shipped a serverless object-removal endpoint that contributed to premium-tier subscription growth.',
-      ],
+      highlight: 'Edge computer vision',
+      summary: 'Delivered computer vision capabilities focused on practical deployment and premium product impact.',
+      outcomes: ['Reduced a background-removal model by 75% through quantization.', 'Shipped an object-removal endpoint for premium users.'],
     },
     {
-      date: 'Jun 2024 — May 2025',
-      role: 'AI Engineer',
+      period: 'Jun 2024 — May 2025',
+      title: 'AI Engineer',
       company: 'E Connect Africa',
-      status: 'COMPLETED',
-      points: [
-        'Owned the full TTS lifecycle for a course-generation product, from data preparation to model deployment.',
-        'Built end-to-end audio-visual synchronization pipelines using SadTalker, Wav2Lip and LatentSync for interactive learning.',
-      ],
-    },
-    {
-      date: 'Jul 2023 — Aug 2023',
-      role: 'Machine Learning Intern',
-      company: 'TensorGraph',
-      status: 'COMPLETED',
-      points: [
-        'Built a BERT-based entity-recognition system for restaurant phone-order automation and used GPT for synthetic data generation.',
-        'Reduced annotation costs by 80% through a synthetic-data workflow.',
-      ],
+      highlight: 'Learning experience generation',
+      summary: 'Owned speech and audio-visual elements of an AI-powered course-generation product.',
+      outcomes: ['Managed TTS from data preparation to delivery.', 'Built synchronized character-animation pipelines using SadTalker, Wav2Lip, and LatentSync.'],
     },
   ];
 
   return (
-    <section id="experience" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-12">
-          <p className="text-gray-500 font-mono text-sm mb-2">
-            <span className="text-green-400">$</span> git log --experience --oneline
-          </p>
-          <h2 className="text-3xl md:text-4xl font-mono font-bold neon-text">
-            # Experience Log
-          </h2>
-        </div>
+    <section id="experience" className="px-6 py-24 md:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="grid gap-10 lg:grid-cols-[.8fr_1.2fr] lg:gap-20">
+          <div>
+            <p className="eyebrow">03 · Experience</p>
+            <h2 className="section-heading mt-4">Work that connects model research to real-world speech products.</h2>
+            <p className="section-copy mt-5">I’ve worked across fine-tuning, deployment, and applied product delivery — with a current focus on Arabic voice systems that operate under real-time constraints.</p>
+          </div>
 
-        <div className="relative border-l border-green-900/70 ml-3 md:ml-5 space-y-8">
-          {experience.map((item, index) => (
-            <article key={`${item.company}-${item.date}`} className="relative pl-7 md:pl-10">
-              <span className={`absolute -left-[5px] top-6 h-2.5 w-2.5 rounded-full ${index === 0 ? 'bg-green-400 shadow-[0_0_12px_hsl(120_100%_50%)]' : 'bg-green-900'}`} />
-              <div className="code-block card-glow">
-                <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+          <div className="space-y-4">
+            {roles.map((role, index) => (
+              <article key={role.company} className="signal-card rounded-2xl p-6 md:p-7">
+                <div className="flex flex-col justify-between gap-5 sm:flex-row">
                   <div>
-                    <p className="font-mono text-xs text-gray-500 mb-2">commit {String(experience.length - index).padStart(7, '0')}</p>
-                    <h3 className="font-mono text-base md:text-lg text-green-300">{item.role}</h3>
-                    <p className="font-mono text-sm text-cyan-400 mt-1">@ {item.company}</p>
+                    <p className="font-mono text-[11px] text-cyan-300">{role.period}</p>
+                    <h3 className="mt-3 font-display text-lg font-bold tracking-[-0.03em] text-slate-50">{role.title}</h3>
+                    <p className="mt-1 text-sm font-medium text-cyan-100">{role.company}</p>
                   </div>
-                  <div className="md:text-right shrink-0">
-                    <p className="font-mono text-xs text-gray-500">{item.date}</p>
-                    <span className={`inline-block mt-2 px-2 py-0.5 rounded border text-[10px] font-mono ${item.status === 'RUNNING' ? 'border-green-500/40 text-green-400 bg-green-500/10' : 'border-gray-700 text-gray-500'}`}>
-                      {item.status === 'RUNNING' ? '● ' : ''}{item.status}
-                    </span>
-                  </div>
+                  <span className="h-fit rounded-full border border-cyan-100/10 bg-cyan-300/5 px-3 py-1.5 text-[11px] font-medium text-slate-400">{role.highlight}</span>
                 </div>
-                <ul className="mt-5 space-y-2">
-                  {item.points.map((point) => (
-                    <li key={point} className="flex gap-3 font-mono text-xs md:text-sm leading-relaxed text-gray-400">
-                      <span className="text-green-600 shrink-0">›</span>
-                      <span>{point}</span>
-                    </li>
+                <p className="mt-5 text-sm leading-6 text-slate-400">{role.summary}</p>
+                <ul className="mt-5 space-y-2.5">
+                  {role.outcomes.map((outcome) => (
+                    <li key={outcome} className="flex gap-3 text-sm leading-6 text-slate-300"><ArrowUpRight className={`mt-1 h-3.5 w-3.5 shrink-0 ${index === 0 ? 'text-cyan-200' : 'text-slate-500'}`} />{outcome}</li>
                   ))}
                 </ul>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>

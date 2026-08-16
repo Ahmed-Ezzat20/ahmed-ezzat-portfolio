@@ -12,15 +12,15 @@ describe('terminal portfolio content', () => {
     expect(screen.getByLabelText('GitHub').getAttribute('href')).toBe('https://github.com/Ahmed-Ezzat20');
     expect(screen.getByLabelText('LinkedIn').getAttribute('href')).toBe('https://www.linkedin.com/in/mrezzat/');
     expect(screen.getByLabelText('Email').getAttribute('href')).toBe('mailto:ahmedezzat0247@gmail.com');
-    expect(screen.getByText('cat ./Ahmed_Ezzat_CV.pdf').getAttribute('href')).toBe(`${import.meta.env.BASE_URL}Ahmed_Ezzat_CV.pdf`);
+    expect(screen.getByText('Download CV').getAttribute('href')).toBe(`${import.meta.env.BASE_URL}Ahmed_Ezzat_CV.pdf`);
   });
 
   it('renders the updated Voice AI specialization', () => {
     render(<HeroSection />);
 
-    expect(screen.getByText(/Arabic Speech & Voice AI/i)).toBeTruthy();
-    expect(screen.getByText(/13.6k hours/i)).toBeTruthy();
-    expect(screen.getAllByText(/154ms/i).length).toBeGreaterThan(0);
+    expect(screen.getByText(/Arabic voice/i)).toBeTruthy();
+    expect(screen.getByText(/13.6k/i)).toBeTruthy();
+    expect(screen.getAllByText(/154 ms/i).length).toBeGreaterThan(0);
   });
 
   it('uses the confirmed LinkedIn link in the contact area', () => {

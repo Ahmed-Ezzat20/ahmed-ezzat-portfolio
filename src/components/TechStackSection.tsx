@@ -1,82 +1,48 @@
 const TechStackSection = () => {
-  const skillCategories = [
+  const capabilityGroups = [
     {
+      number: '01',
       title: 'Speech & Voice AI',
-      color: 'text-green-400',
-      borderColor: 'border-green-900 hover:border-green-500',
-      skills: ['F5-TTS', 'Kokoro', 'Chatterbox', 'XTTSv2', 'Spark-TTS', 'RVC', 'Whisper', 'NVIDIA Parakeet-TDT', 'NeMo', 'Silero VAD', 'pyannote', 'MFA', 'CTC', 'librosa', 'torchaudio', 'KenLM'],
+      description: 'A dialect-aware toolkit for Arabic text-to-speech, transcription, alignment, and audio processing.',
+      tools: ['F5-TTS', 'Spark-TTS', 'XTTSv2', 'Whisper', 'NVIDIA Parakeet', 'NeMo', 'Silero VAD', 'pyannote'],
     },
     {
-      title: 'Voice Agents & Pipelines',
-      color: 'text-cyan-400',
-      borderColor: 'border-cyan-900 hover:border-cyan-500',
-      skills: ['pipecat', 'LiveKit', 'WebRTC', 'WebSocket', 'FastAPI', 'VAD/STT/LLM/TTS orchestration', 'barge-in', 'end-of-utterance detection'],
+      number: '02',
+      title: 'Real-time voice agents',
+      description: 'Low-latency orchestration for conversational systems that listen, reason, and respond naturally.',
+      tools: ['Pipecat', 'LiveKit', 'WebRTC', 'WebSocket', 'FastAPI', 'Barge-in', 'VAD / STT / LLM / TTS'],
     },
     {
-      title: 'Machine Learning',
-      color: 'text-purple-400',
-      borderColor: 'border-purple-900 hover:border-purple-500',
-      skills: ['PyTorch', 'TensorFlow', 'fine-tuning', 'flow-matching', 'Diffusion Models', 'model distillation', 'State Space Models', 'Transformers', 'LoRA/PEFT', 'quantization'],
-    },
-    {
-      title: 'Deployment & Infrastructure',
-      color: 'text-yellow-400',
-      borderColor: 'border-yellow-900 hover:border-yellow-500',
-      skills: ['GCP (L4/A100/H100/B200)', 'TensorRT', 'Docker', 'Modal', 'RunPod', 'Nginx', 'Hugging Face Hub', 'zero-downtime pipelines', 'on-prem GPU'],
-    },
-    {
-      title: 'Languages & Tools',
-      color: 'text-orange-400',
-      borderColor: 'border-orange-900 hover:border-orange-500',
-      skills: ['Python', 'JavaScript/TypeScript', 'Bash', 'Git/GitHub', 'WSL'],
+      number: '03',
+      title: 'ML deployment & optimization',
+      description: 'Infrastructure and optimization practices for shipping models onto cost-aware GPU production stacks.',
+      tools: ['PyTorch', 'TensorRT', 'Docker', 'GCP', 'Modal', 'RunPod', 'Hugging Face Hub', 'LoRA / PEFT'],
     },
   ];
 
   return (
-    <section id="skills" className="py-24 px-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="mb-12">
-          <p className="text-gray-500 font-mono text-sm mb-2">
-            <span className="text-green-400">$</span> ls -la ./skills/
-          </p>
-          <h2 className="text-3xl md:text-4xl font-mono font-bold neon-text">
-            # Tech Stack
-          </h2>
+    <section id="skills" className="px-6 py-24 md:py-32">
+      <div className="mx-auto max-w-6xl">
+        <div className="max-w-2xl">
+          <p className="eyebrow">02 · Expertise</p>
+          <h2 className="section-heading mt-4">Technical depth across the entire voice stack.</h2>
+          <p className="section-copy mt-5">From preparing Arabic speech corpora to deploying optimized models, I build the systems surrounding the model as carefully as the model itself.</p>
         </div>
 
-        <div className="space-y-6">
-          {skillCategories.map((category) => (
-            <div key={category.title} className={`code-block border ${category.borderColor} transition-all duration-300`}>
-              <div className="flex items-center gap-2 mb-4">
-                <span className="text-gray-500 font-mono text-xs">{'>'}</span>
-                <h3 className={`font-mono font-bold ${category.color}`}>
-                  {category.title}
-                </h3>
+        <div className="mt-12 grid gap-5 lg:grid-cols-3">
+          {capabilityGroups.map((group) => (
+            <article key={group.number} className="signal-card rounded-3xl p-6 md:p-7">
+              <div className="flex items-center justify-between">
+                <span className="font-mono text-xs text-cyan-300">{group.number}</span>
+                <span className="h-1.5 w-1.5 rounded-full bg-cyan-300" />
               </div>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span
-                    key={skill}
-                    className="px-2.5 py-1 text-xs font-mono bg-black/50 border border-gray-800 rounded text-gray-300 hover:text-green-400 hover:border-green-800 transition-all duration-200"
-                  >
-                    {skill}
-                  </span>
-                ))}
+              <h3 className="mt-8 font-display text-xl font-bold tracking-[-0.03em] text-slate-50">{group.title}</h3>
+              <p className="mt-3 text-sm leading-6 text-slate-400">{group.description}</p>
+              <div className="mt-7 flex flex-wrap gap-2">
+                {group.tools.map((tool) => <span key={tool} className="rounded-full border border-cyan-100/10 bg-slate-950/20 px-2.5 py-1.5 text-[11px] font-medium text-slate-300">{tool}</span>)}
               </div>
-            </div>
+            </article>
           ))}
-        </div>
-
-        <div className="mt-8 code-block">
-          <p className="text-gray-500 text-xs mb-3 font-mono">$ neofetch</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-1 text-sm font-mono text-gray-300">
-            <p><span className="text-green-400">OS</span>: Ubuntu 22.04 / WSL2</p>
-            <p><span className="text-green-400">GPU</span>: NVIDIA L4 / A100 / H100</p>
-            <p><span className="text-green-400">Editor</span>: VS Code + Vim</p>
-            <p><span className="text-green-400">Shell</span>: Bash / Zsh</p>
-            <p><span className="text-green-400">Cloud</span>: GCP / Modal / RunPod</p>
-            <p><span className="text-green-400">ML Framework</span>: PyTorch</p>
-          </div>
         </div>
       </div>
     </section>

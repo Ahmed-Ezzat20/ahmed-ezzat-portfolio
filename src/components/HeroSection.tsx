@@ -1,175 +1,125 @@
-import { useState, useEffect } from 'react';
-import { Github, Linkedin, Mail, ExternalLink } from 'lucide-react';
+import { ArrowDownRight, Download, Github, Linkedin, Mail, Mic2, Radio, Sparkles } from 'lucide-react';
+
+const VoiceWaveform = () => {
+  const bars = [32, 52, 76, 44, 92, 62, 108, 78, 46, 88, 120, 68, 52, 100, 74, 38, 64, 96, 58, 78, 42, 66, 88, 54, 34, 72, 48, 94, 62, 40, 76, 52];
+
+  return (
+    <div className="relative h-[310px] overflow-hidden rounded-[1.6rem] signal-surface p-6 md:h-[380px] md:p-8">
+      <div className="absolute inset-0 signal-grid" />
+      <div className="signal-orb -right-44 -top-44" />
+      <div className="signal-ring -right-20 -top-20 h-80 w-80" />
+      <div className="signal-ring -right-2 top-0 h-56 w-56" />
+
+      <div className="relative flex items-center justify-between">
+        <div className="flex items-center gap-2 rounded-full border border-cyan-300/15 bg-cyan-300/5 px-3 py-1.5">
+          <span className="pulse-dot h-2 w-2 rounded-full bg-emerald-400" />
+          <span className="font-mono text-[10px] tracking-[0.15em] text-cyan-100/80">LIVE VOICE PIPELINE</span>
+        </div>
+        <Radio className="h-5 w-5 text-cyan-300/60" />
+      </div>
+
+      <div className="relative mt-12 flex h-[150px] items-center justify-center gap-[5px] md:mt-16 md:h-[170px] md:gap-[7px]">
+        {bars.map((height, index) => (
+          <span
+            key={`${height}-${index}`}
+            className="wave-bar w-1 rounded-full bg-gradient-to-b from-cyan-200 via-cyan-400 to-sky-600 md:w-1.5"
+            style={{ height: `${height}px`, animationDelay: `${(index % 8) * 0.12}s` }}
+          />
+        ))}
+      </div>
+
+      <div className="relative mt-5 flex items-end justify-between border-t border-cyan-100/10 pt-4">
+        <div>
+          <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-slate-500">Current Signal</p>
+          <p className="mt-1 font-display text-sm font-semibold text-slate-100">Saudi Arabic TTS · Streaming</p>
+        </div>
+        <div className="text-right">
+          <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-slate-500">Time to first audio</p>
+          <p className="mt-1 font-display text-xl font-bold text-cyan-200">154 ms</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const HeroSection = () => {
-  const [displayText, setDisplayText] = useState('');
-  const [currentRole, setCurrentRole] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [showCursor, setShowCursor] = useState(true);
-
-  const roles = [
-    'TTS Lead @ hams.ai',
-    'Voice AI Engineer',
-    'Arabic Speech Specialist',
-    'Manus Fellow',
+  const socials = [
+    { label: 'GitHub', href: 'https://github.com/Ahmed-Ezzat20', icon: Github },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/mrezzat/', icon: Linkedin },
+    { label: 'Email', href: 'mailto:ahmedezzat0247@gmail.com', icon: Mail },
   ];
 
-  useEffect(() => {
-    const role = roles[currentRole];
-    let timeout: NodeJS.Timeout;
-
-    if (!isDeleting) {
-      if (displayText.length < role.length) {
-        timeout = setTimeout(() => {
-          setDisplayText(role.slice(0, displayText.length + 1));
-        }, 80);
-      } else {
-        timeout = setTimeout(() => setIsDeleting(true), 2000);
-      }
-    } else {
-      if (displayText.length > 0) {
-        timeout = setTimeout(() => {
-          setDisplayText(displayText.slice(0, -1));
-        }, 40);
-      } else {
-        setIsDeleting(false);
-        setCurrentRole((prev) => (prev + 1) % roles.length);
-      }
-    }
-
-    return () => clearTimeout(timeout);
-  }, [displayText, isDeleting, currentRole]);
-
-  useEffect(() => {
-    const interval = setInterval(() => setShowCursor((prev) => !prev), 530);
-    return () => clearInterval(interval);
-  }, []);
-
-  const socialLinks = [
-    { icon: Github, href: 'https://github.com/Ahmed-Ezzat20', label: 'GitHub' },
-    { icon: Linkedin, href: 'https://www.linkedin.com/in/mrezzat/', label: 'LinkedIn' },
-    { icon: Mail, href: 'mailto:ahmedezzat0247@gmail.com', label: 'Email' },
-    { icon: ExternalLink, href: 'https://scholar.google.com/citations?user=5OHfOSgAAAAJ&hl=en', label: 'Scholar' },
+  const metrics = [
+    { value: '13.6k', label: 'speech hours trained' },
+    { value: '~9×', label: 'inference speedup' },
+    { value: '0.03', label: 'real-time factor' },
   ];
 
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative px-6">
-      {/* Subtle grid background */}
-      <div className="absolute inset-0 opacity-[0.03]" style={{
-        backgroundImage: `linear-gradient(hsl(120 100% 50%) 1px, transparent 1px), linear-gradient(90deg, hsl(120 100% 50%) 1px, transparent 1px)`,
-        backgroundSize: '50px 50px'
-      }} />
+    <section id="home" className="relative isolate overflow-hidden px-6 pb-20 pt-32 md:pb-28 md:pt-40">
+      <div className="signal-grid absolute inset-0 -z-10" />
+      <div className="signal-orb -left-72 top-16 -z-10" />
 
-      <div className="max-w-4xl w-full relative z-10">
-        {/* Terminal window */}
-        <div className="terminal-window">
-          <div className="terminal-header">
-            <div className="terminal-dot bg-red-500" />
-            <div className="terminal-dot bg-yellow-500" />
-            <div className="terminal-dot bg-green-500" />
-            <span className="ml-3 text-xs text-gray-500 font-mono">ahmed@portfolio ~ </span>
+      <div className="mx-auto grid max-w-6xl items-center gap-14 lg:grid-cols-[1.1fr_.9fr] lg:gap-16">
+        <div>
+          <div className="fade-up flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-cyan-300" />
+            <span className="eyebrow">Voice AI Engineer · Cairo, Egypt</span>
           </div>
 
-          <div className="p-6 md:p-10 space-y-6">
-            {/* ASCII art name */}
-            <pre className="text-[10px] sm:text-xs md:text-sm leading-tight neon-text hidden sm:block select-none">
-{` █████╗ ██╗  ██╗███╗   ███╗███████╗██████╗ 
-██╔══██╗██║  ██║████╗ ████║██╔════╝██╔══██╗
-███████║███████║██╔████╔██║█████╗  ██║  ██║
-██╔══██║██╔══██║██║╚██╔╝██║██╔══╝  ██║  ██║
-██║  ██║██║  ██║██║ ╚═╝ ██║███████╗██████╔╝
-╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝╚═════╝`}
-            </pre>
+          <h1 className="fade-up fade-up-delay-1 mt-6 max-w-3xl font-display text-5xl font-bold leading-[1.04] tracking-[-0.065em] text-slate-50 sm:text-6xl md:text-7xl">
+            Ahmed Ezzat
+            <span className="mt-3 block text-cyan-200">building the signal layer for Arabic voice.</span>
+          </h1>
 
-            {/* Mobile name */}
-            <h1 className="sm:hidden text-3xl font-bold neon-text font-mono">
-              Ahmed Ezzat
-            </h1>
+          <p className="fade-up fade-up-delay-2 mt-7 max-w-2xl text-base leading-8 text-slate-300 md:text-lg">
+            TTS Lead at hams.ai, focused on production-grade Saudi Arabic speech systems — from large-scale data and model fine-tuning to real-time, TensorRT-optimized inference.
+          </p>
 
-            {/* Role with typing effect */}
-            <div className="space-y-2">
-              <p className="text-gray-500 text-sm font-mono">
-                <span className="text-green-400">$</span> whoami
-              </p>
-              <h2 className="text-xl md:text-2xl font-mono">
-                <span className="text-cyan-400">&gt;</span>{' '}
-                <span className="text-green-300">{displayText}</span>
-                <span className={`inline-block w-2.5 h-5 bg-green-400 ml-0.5 align-text-bottom ${showCursor ? 'opacity-100' : 'opacity-0'}`} />
-              </h2>
-            </div>
+          <div className="fade-up fade-up-delay-2 mt-8 flex flex-wrap gap-3">
+            <a href="#experience" className="inline-flex items-center gap-2 rounded-full bg-cyan-300 px-5 py-3 text-sm font-semibold text-slate-950 transition-transform hover:-translate-y-0.5 hover:bg-cyan-200">
+              Explore my work <ArrowDownRight className="h-4 w-4" />
+            </a>
+            <a href={`${import.meta.env.BASE_URL}Ahmed_Ezzat_CV.pdf`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-cyan-200/20 bg-slate-900/30 px-5 py-3 text-sm font-semibold text-cyan-100 transition-colors hover:border-cyan-200/50 hover:bg-cyan-300/10">
+              Download CV <Download className="h-4 w-4" />
+            </a>
+          </div>
 
-            {/* Description */}
-            <div className="space-y-3 text-sm md:text-base">
-              <p className="text-gray-400 font-mono">
-                <span className="text-green-400">$</span> cat about.txt
-              </p>
-              <p className="text-gray-300 leading-relaxed pl-4 border-l-2 border-green-900">
-                AI Engineer specializing in Arabic Speech & Voice AI. Building and operating
-                production real-time Saudi Arabic TTS systems — owning the stack end to end,
-                from 13.6k hours of training data to TensorRT-optimized streaming inference
-                at <span className="text-green-400 font-semibold">154ms</span> time-to-first-audio.
-              </p>
-            </div>
+          <div className="fade-up fade-up-delay-3 mt-10 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <span className="font-mono text-[11px] uppercase tracking-[0.13em] text-slate-500">Connect</span>
+            {socials.map((social) => {
+              const Icon = social.icon;
+              return (
+                <a key={social.label} href={social.href} target={social.label === 'Email' ? undefined : '_blank'} rel={social.label === 'Email' ? undefined : 'noopener noreferrer'} aria-label={social.label} className="text-slate-400 transition-colors hover:text-cyan-200">
+                  <Icon className="h-5 w-5" />
+                </a>
+              );
+            })}
+          </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 pt-4">
-              {[
-                { label: 'RTF', value: '0.03-0.05', color: 'text-green-400' },
-                { label: 'Training Hours', value: '13.6k', color: 'text-cyan-400' },
-                { label: 'Inference', value: '~9x faster', color: 'text-green-400' },
-                { label: 'TTFA', value: '154ms', color: 'text-cyan-400' },
-              ].map((stat) => (
-                <div key={stat.label} className="code-block text-center py-3">
-                  <div className={`text-lg font-bold font-mono ${stat.color}`}>{stat.value}</div>
-                  <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
-                </div>
-              ))}
-            </div>
+          <div className="fade-up fade-up-delay-3 mt-12 grid max-w-xl grid-cols-3 gap-3 border-t border-cyan-100/10 pt-6">
+            {metrics.map((metric) => (
+              <div key={metric.label}>
+                <p className="metric-value text-2xl md:text-3xl">{metric.value}</p>
+                <p className="mt-1 max-w-24 text-xs leading-5 text-slate-500">{metric.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
 
-            {/* Social links */}
-            <div className="flex items-center gap-4 pt-4">
-              <span className="text-gray-500 text-sm font-mono">
-                <span className="text-green-400">$</span> links --social
-              </span>
-              <div className="flex gap-3">
-                {socialLinks.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-2 border border-green-900 rounded hover:border-green-400 hover:shadow-[0_0_10px_hsl(120_100%_50%/0.3)] transition-all duration-300 group"
-                    aria-label={link.label}
-                  >
-                    <link.icon className="w-4 h-4 text-gray-400 group-hover:text-green-400 transition-colors" />
-                  </a>
-                ))}
+        <div className="fade-up fade-up-delay-2 relative">
+          <VoiceWaveform />
+          <div className="signal-card absolute -bottom-8 -left-3 max-w-[260px] rounded-2xl p-4 md:-left-8">
+            <div className="flex items-start gap-3">
+              <div className="rounded-xl bg-cyan-300/10 p-2"><Mic2 className="h-4 w-4 text-cyan-200" /></div>
+              <div>
+                <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-slate-500">Now Building</p>
+                <p className="mt-1 text-sm font-semibold leading-5 text-slate-100">Production Saudi Arabic TTS for live enterprise agents.</p>
               </div>
             </div>
-
-            {/* CTA */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <a
-                href="#experience"
-                className="px-6 py-2.5 bg-green-500/10 border border-green-500 text-green-400 font-mono text-sm rounded hover:bg-green-500/20 hover:shadow-[0_0_20px_hsl(120_100%_50%/0.2)] transition-all duration-300"
-              >
-                ./view_experience.sh
-              </a>
-              <a
-                href="#contact"
-                className="px-6 py-2.5 border border-gray-700 text-gray-400 font-mono text-sm rounded hover:border-cyan-500 hover:text-cyan-400 transition-all duration-300"
-              >
-                ./contact.sh
-              </a>
-              <a
-                href={`${import.meta.env.BASE_URL}Ahmed_Ezzat_CV.pdf`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="px-6 py-2.5 border border-gray-700 text-gray-400 font-mono text-sm rounded hover:border-green-400 hover:text-green-400 transition-all duration-300"
-              >
-                cat ./Ahmed_Ezzat_CV.pdf
-              </a>
-            </div>
+          </div>
+          <div className="absolute -right-3 top-6 rounded-full border border-cyan-100/15 bg-slate-950/50 p-3 backdrop-blur md:-right-5">
+            <Sparkles className="h-5 w-5 text-cyan-200" />
           </div>
         </div>
       </div>

@@ -1,116 +1,73 @@
-import { useState, useEffect } from 'react';
-import { Menu, X, Terminal } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { Menu, Mic2, X } from 'lucide-react';
 
 const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  const navItems = [
-    { id: 'home', label: '~/' },
-    { id: 'about', label: '/about' },
-    { id: 'skills', label: '/skills' },
-    { id: 'experience', label: '/exp' },
-    { id: 'projects', label: '/projects' },
-    { id: 'contact', label: '/contact' },
+  const items = [
+    { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Expertise' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'contact', label: 'Contact' },
   ];
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-      const sections = navItems.map((item) => document.getElementById(item.id));
-      const scrollPos = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const section = sections[i];
-        if (section && section.offsetTop <= scrollPos) {
-          setActiveSection(navItems[i].id);
-          break;
-        }
-      }
+    const updateState = () => {
+      setIsScrolled(window.scrollY > 20);
+      const position = window.scrollY + 180;
+      const sectionIds = ['home', ...items.map((item) => item.id)];
+      const current = [...sectionIds].reverse().find((id) => {
+        const element = document.getElementById(id);
+        return element && element.offsetTop <= position;
+      });
+      if (current) setActiveSection(current);
     };
 
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    updateState();
+    window.addEventListener('scroll', updateState, { passive: true });
+    return () => window.removeEventListener('scroll', updateState);
   }, []);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-    setIsMobileMenuOpen(false);
+  const goTo = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
   };
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? 'bg-black/90 backdrop-blur-md border-b border-green-900/50'
-          : 'bg-transparent'
-      }`}
-    >
-      <div className="max-w-6xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          {/* Logo */}
-          <button
-            onClick={() => scrollToSection('home')}
-            className="flex items-center gap-2 group"
-          >
-            <Terminal className="w-5 h-5 text-green-400 group-hover:text-green-300 transition-colors" />
-            <span className="font-mono text-sm text-green-400 group-hover:text-green-300 transition-colors">
-              ahmed<span className="text-gray-500">@</span>portfolio
-            </span>
-          </button>
+    <header className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${isScrolled ? 'border-b border-cyan-100/10 bg-[#091727]/80 backdrop-blur-xl' : ''}`}>
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5">
+        <button onClick={() => goTo('home')} className="flex items-center gap-2 text-slate-100">
+          <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-cyan-300/10 text-cyan-200"><Mic2 className="h-4 w-4" /></span>
+          <span className="font-display text-sm font-bold tracking-[-0.03em]">Ahmed Ezzat</span>
+        </button>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-1">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`px-3 py-1.5 font-mono text-xs rounded transition-all duration-300 ${
-                  activeSection === item.id
-                    ? 'text-green-400 bg-green-500/10 border border-green-500/30'
-                    : 'text-gray-500 hover:text-green-400 hover:bg-green-500/5'
-                }`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="md:hidden p-2 text-green-400 hover:text-green-300 transition-colors"
-          >
-            {isMobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+        <div className="hidden items-center gap-1 md:flex">
+          {items.map((item) => (
+            <button key={item.id} onClick={() => goTo(item.id)} className={`rounded-full px-3.5 py-2 text-sm transition-colors ${activeSection === item.id ? 'nav-active' : 'text-slate-400 hover:text-cyan-100'}`}>
+              {item.label}
+            </button>
+          ))}
+          <a href="#contact" className="ml-3 rounded-full border border-cyan-200/25 px-4 py-2 text-sm font-medium text-cyan-100 transition-colors hover:border-cyan-200/50 hover:bg-cyan-300/10">Let’s talk</a>
         </div>
 
-        {/* Mobile Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 border border-green-900/50 rounded bg-black/95 backdrop-blur-md">
-            <div className="p-4 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  className={`w-full text-left px-3 py-2 font-mono text-sm rounded transition-all ${
-                    activeSection === item.id
-                      ? 'text-green-400 bg-green-500/10'
-                      : 'text-gray-400 hover:text-green-400 hover:bg-green-500/5'
-                  }`}
-                >
-                  <span className="text-green-600">$</span> cd {item.label}
-                </button>
-              ))}
-            </div>
+        <button className="rounded-lg p-2 text-cyan-100 md:hidden" onClick={() => setIsMenuOpen((open) => !open)} aria-label="Toggle navigation">
+          {isMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+        </button>
+      </nav>
+
+      {isMenuOpen && (
+        <div className="border-t border-cyan-100/10 bg-[#091727]/95 px-6 pb-5 pt-2 backdrop-blur-xl md:hidden">
+          <div className="mx-auto flex max-w-6xl flex-col gap-1">
+            {items.map((item) => (
+              <button key={item.id} onClick={() => goTo(item.id)} className={`rounded-xl px-3 py-3 text-left text-sm ${activeSection === item.id ? 'bg-cyan-300/10 text-cyan-100' : 'text-slate-400'}`}>{item.label}</button>
+            ))}
           </div>
-        )}
-      </div>
-    </nav>
+        </div>
+      )}
+    </header>
   );
 };
 

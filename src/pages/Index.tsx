@@ -8,10 +8,9 @@ import ContactSection from '@/components/ContactSection';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-black text-foreground overflow-x-hidden relative scanlines">
+    <div className="min-h-screen overflow-x-hidden bg-background text-foreground">
       <Navigation />
-
-      <main className="relative z-10">
+      <main>
         <HeroSection />
         <AboutSection />
         <TechStackSection />
@@ -19,12 +18,10 @@ const Index = () => {
         <PortfolioSection />
         <ContactSection />
       </main>
-
-      <footer className="relative z-10 border-t border-green-900/50 px-6 py-8">
-        <div className="max-w-4xl mx-auto flex flex-col md:flex-row justify-between gap-3 font-mono text-xs text-gray-600">
-          <p><span className="text-green-500">$</span> echo "© 2026 Ahmed Ezzat"</p>
-          <p>built_with: React + TypeScript + Tailwind CSS</p>
-          <p className="text-green-700">system_status: online</p>
+      <footer className="px-6 pb-8">
+        <div className="mx-auto flex max-w-6xl flex-col justify-between gap-3 border-t border-cyan-100/10 pt-7 text-xs text-slate-500 md:flex-row">
+          <p>© 2026 Ahmed Ezzat Ahmed. Crafted for clear voice systems.</p>
+          <p>React · TypeScript · Tailwind CSS</p>
         </div>
       </footer>
     </div>

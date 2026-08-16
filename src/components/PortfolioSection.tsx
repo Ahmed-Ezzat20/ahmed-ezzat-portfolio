@@ -1,222 +1,124 @@
-import React, { useState } from 'react';
-import { Card } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { ExternalLink, Github, Eye } from 'lucide-react';
-import projectWebDev from '@/assets/project-web-dev.webp';
-import projectMobileApp from '@/assets/project-mobile-app.webp';
-import projectBranding from '@/assets/project-branding.webp';
+import { ExternalLink, Github, Database, Radio, Eye, FileText } from 'lucide-react';
 
 const PortfolioSection = () => {
-  const [filter, setFilter] = useState('all');
-
   const projects = [
     {
-      id: 1,
-      title: 'Alzheimer MRI Classifier',
-      description: 'Deep learning architecture for Alzheimer\'s Disease classification using MRI scans with comprehensive data preprocessing and hyperparameter tuning.',
-      image: projectWebDev,
-      category: 'ai',
-      technologies: ['Python', 'TensorFlow', 'Deep Learning', 'MRI Analysis', 'Computer Vision'],
-      liveUrl: 'https://github.com/Ahmed-Ezzat20/alzheimer-mri-classifier',
-      githubUrl: 'https://github.com/Ahmed-Ezzat20/alzheimer-mri-classifier',
-      results: {
-        accuracy: '92% accuracy achieved',
-        impact: 'Medical diagnosis support',
-        tech: 'CNN architecture'
-      }
+      type: 'DATASET / 2026',
+      title: 'Large-Scale Saudi Arabic Speech Corpus',
+      description: 'Designed and executed the full data pipeline for a 1,368-hour Saudi/Khaleeji Arabic corpus. Built for TTS and ASR with source curation, multi-engine transcription with CER-based quality control, diacritization, and dialect annotation.',
+      stack: ['Arabic Speech', 'ASR', 'TTS', 'Quality Control', 'Diacritization'],
+      metric: '1,368h',
+      metricLabel: 'curated speech',
+      icon: Database,
+      accent: 'text-green-400',
     },
     {
-      id: 2,
-      title: 'IEEE Plant Leaf Classification Research',
-      description: 'Published research on lightweight plant leaf classification using transfer learning, designed for real-time classification on edge devices.',
-      image: projectBranding,
-      category: 'ai',
-      technologies: ['Transfer Learning', 'Edge Computing', 'IEEE Publication', 'Computer Vision', 'Research'],
-      liveUrl: 'https://ieeexplore.ieee.org/document/your-paper-id',
-      githubUrl: 'https://github.com/Ahmed-Ezzat20/plant-leaf-classification',
-      results: {
-        publication: 'IEEE JAC-ECC 2024',
-        innovation: 'Transfer learning pipeline',
-        impact: 'Real-time edge deployment'
-      }
+      type: 'APPLICATION / 2025',
+      title: 'Real-Time Audio Chat with Voice AI',
+      description: 'Production-ready voice agent integrating VAD, Whisper Large v3 Turbo for STT, Qwen 3 for LLM reasoning, and Resemble AI Chatterbox for TTS over WebRTC—plus low-latency streaming and barge-in for natural interruption handling.',
+      stack: ['WebRTC', 'VAD', 'Whisper', 'Qwen 3', 'Chatterbox TTS'],
+      metric: 'Real-time',
+      metricLabel: 'voice interaction',
+      icon: Radio,
+      accent: 'text-cyan-400',
     },
     {
-      id: 3,
-      title: 'YOLOv8 Prohibited Object Detection',
-      description: 'Graduation project implementing YOLOv8 for detecting prohibited objects in online exams, combined with eye-gaze tracking and Siamese network for face recognition.',
-      image: projectMobileApp,
-      category: 'cv',
-      technologies: ['YOLOv8', 'Computer Vision', 'Siamese Networks', 'Eye Tracking', 'PyTorch'],
-      liveUrl: '#',
-      githubUrl: '#',
-      results: {
-        performance: '86 mAP detection',
-        reduction: '89% cheating reduction',
-        innovation: 'Multi-modal approach'
-      }
+      type: 'RESEARCH / 2025',
+      title: 'EgyLens — VQA for Egyptian Arabic',
+      description: 'Fine-tuned Google’s Gemma 3n on Egyptian Arabic visual-question-answering datasets to enable on-device, privacy-preserving visual understanding with offline inference.',
+      stack: ['Gemma 3n', 'VQA', 'Egyptian Arabic', 'On-device AI'],
+      metric: 'Offline',
+      metricLabel: 'private inference',
+      icon: Eye,
+      accent: 'text-purple-400',
     },
     {
-      id: 4,
-      title: 'Cars Plate Detection and OCR',
-      description: 'License plate detection and OCR system for a car service management platform in KSA. Focused on data validation, preprocessing, and model optimization.',
-      image: projectBranding,
-      category: 'cv',
-      technologies: ['OpenCV', 'OCR', 'Image Processing', 'Python', 'Data Validation'],
-      liveUrl: '#',
-      githubUrl: '#',
-      results: {
-        accuracy: '99% error reduction',
-        deployment: 'Production system',
-        impact: 'Automated registration'
-      }
-    },
-    {
-      id: 5,
-      title: 'Background Removal Model',
-      description: 'Delivered background removal model with quantization optimization, reducing model size by 75% for deployment on edge devices like mobile phones.',
-      image: projectWebDev,
-      category: 'ai',
-      technologies: ['Model Quantization', 'Edge Computing', 'Mobile Deployment', 'Optimization'],
-      liveUrl: '#',
-      githubUrl: '#',
-      results: {
-        optimization: '75% size reduction',
-        deployment: 'Mobile-ready',
-        performance: 'Edge computing'
-      }
+      type: 'PUBLICATION / 2024',
+      title: 'Lightweight Plant Leaf Classification',
+      description: 'IEEE publication evaluating lightweight transfer-learning models for on-device plant species identification, designed for practical, resource-aware deployment.',
+      stack: ['Transfer Learning', 'Computer Vision', 'Edge AI', 'IEEE'],
+      metric: 'IEEE',
+      metricLabel: 'JAC-ECC 2024',
+      icon: FileText,
+      accent: 'text-yellow-400',
+      href: 'https://doi.org/10.1109/JAC-ECC64419.2024.11061212',
     },
   ];
-
-  const categories = [
-    { id: 'all', label: 'All Projects' },
-    { id: 'ai', label: 'AI & ML' },
-    { id: 'cv', label: 'Computer Vision' },
-  ];
-
-  const filteredProjects = filter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === filter);
 
   return (
-    <section id="portfolio" className="py-20">
-      <div className="container mx-auto px-6">
-        
-        {/* Section Header */}
-        <div className="text-center mb-16 animate-fade-in">
-          <h2 className="text-4xl lg:text-5xl font-serif font-bold mb-6">
-            Featured <span className="text-accent-gradient">Projects</span>
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-            A showcase of my AI and machine learning projects, demonstrating expertise in computer vision, 
-            deep learning, and production-ready AI solutions.
+    <section id="projects" className="py-24 px-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="mb-12">
+          <p className="text-gray-500 font-mono text-sm mb-2">
+            <span className="text-green-400">$</span> find ./projects -type f -maxdepth 2
           </p>
-
-          {/* Filter Buttons */}
-          <div className="flex flex-wrap justify-center gap-4">
-            {categories.map((category) => (
-              <Button
-                key={category.id}
-                variant={filter === category.id ? 'accent' : 'minimal'}
-                onClick={() => setFilter(category.id)}
-                className="transition-spring"
-              >
-                {category.label}
-              </Button>
-            ))}
-          </div>
+          <h2 className="text-3xl md:text-4xl font-mono font-bold neon-text">
+            # Selected Projects
+          </h2>
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid lg:grid-cols-1 gap-12">
-          {filteredProjects.map((project, index) => (
-            <Card 
-              key={project.id} 
-              className="overflow-hidden shadow-card hover:shadow-elegant transition-smooth animate-fade-in group"
-              style={{ animationDelay: `${index * 0.2}s` }}
-            >
-              <div className="flex flex-col lg:flex-row">
-                
-                {/* Project Image */}
-                <div className="lg:w-1/2 relative overflow-hidden">
-                  <img
-                    src={project.image}
-                    alt={project.title}
-                    className="w-full h-80 lg:h-full object-cover transition-smooth group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-primary opacity-0 group-hover:opacity-20 transition-smooth" />
-                </div>
-
-                {/* Project Details */}
-                <div className="lg:w-1/2 p-8 lg:p-12 flex flex-col h-full">
-                  <div className="mb-4">
-                    <Badge variant="outline" className="mb-4 bg-gradient-accent text-accent-foreground">
-                      {categories.find(cat => cat.id === project.category)?.label}
-                    </Badge>
-                    <h3 className="text-2xl lg:text-3xl font-serif font-bold mb-4">
+        <div className="grid gap-5">
+          {projects.map((project) => {
+            const Icon = project.icon;
+            return (
+              <article key={project.title} className="code-block card-glow group">
+                <div className="flex flex-col gap-5 md:flex-row md:justify-between">
+                  <div className="min-w-0">
+                    <div className="flex flex-wrap items-center gap-3 mb-3">
+                      <Icon className={`w-4 h-4 ${project.accent}`} />
+                      <p className="text-[11px] tracking-wider text-gray-500 font-mono">{project.type}</p>
+                    </div>
+                    <h3 className="font-mono text-lg md:text-xl text-gray-100 group-hover:text-green-300 transition-colors">
                       {project.title}
                     </h3>
-                    <p className="text-muted-foreground mb-6 text-lg leading-relaxed">
+                    <p className="mt-3 text-sm leading-relaxed text-gray-400">
                       {project.description}
                     </p>
-                  </div>
-
-                  {/* Technologies */}
-                  <div className="mb-6">
-                    <h4 className="font-semibold mb-3">Technologies Used:</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.technologies.map((tech) => (
-                        <Badge key={tech} variant="secondary">
-                          {tech}
-                        </Badge>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {project.stack.map((item) => (
+                        <span key={item} className="px-2 py-1 rounded text-[11px] font-mono bg-black/60 border border-gray-800 text-gray-400">
+                          {item}
+                        </span>
                       ))}
                     </div>
                   </div>
-
-                  {/* Results */}
-                  <div className="mb-8">
-                    <h4 className="font-semibold mb-3">Key Results:</h4>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-                      {Object.entries(project.results).map(([key, value]) => (
-                        <div key={key} className="text-center p-3 bg-muted rounded-lg">
-                          <div className="font-semibold text-accent">{value}</div>
-                          <div className="text-sm text-muted-foreground capitalize">
-                            {key.replace(/([A-Z])/g, ' $1').trim()}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Action Buttons */}
-                  <div className="flex gap-4 mt-auto">
-                    <Button variant="accent" className="flex-1">
-                      <Eye className="h-4 w-4 mr-2" />
-                      Live Demo
-                    </Button>
-                    <Button variant="minimal" className="flex-1">
-                      <Github className="h-4 w-4 mr-2" />
-                      View Code
-                    </Button>
+                  <div className="shrink-0 md:text-right">
+                    <p className={`text-xl font-mono font-bold ${project.accent}`}>{project.metric}</p>
+                    <p className="mt-1 text-[10px] uppercase tracking-wider text-gray-600">{project.metricLabel}</p>
+                    {project.href && (
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 mt-5 font-mono text-xs text-gray-500 hover:text-green-400 transition-colors"
+                      >
+                        view_paper <ExternalLink className="w-3 h-3" />
+                      </a>
+                    )}
                   </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              </article>
+            );
+          })}
         </div>
 
-        {/* CTA */}
-        <div className="text-center mt-16 animate-fade-in">
-          <p className="text-lg text-muted-foreground mb-6">
-            Interested in working together on your next project?
-          </p>
-          <Button 
-            variant="hero" 
-            size="lg"
-            onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+        <div className="mt-10 flex flex-wrap gap-4">
+          <a
+            href="https://github.com/Ahmed-Ezzat20"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 border border-green-700 text-green-400 font-mono text-sm rounded hover:bg-green-500/10 hover:border-green-400 transition-all"
           >
-            Start a Conversation
-          </Button>
+            <Github className="w-4 h-4" /> git clone github.com/Ahmed-Ezzat20
+          </a>
+          <a
+            href="https://scholar.google.com/citations?user=5OHfOSgAAAAJ&hl=en"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-5 py-2.5 border border-gray-700 text-gray-400 font-mono text-sm rounded hover:border-cyan-500 hover:text-cyan-400 transition-all"
+          >
+            <ExternalLink className="w-4 h-4" /> open publications
+          </a>
         </div>
       </div>
     </section>

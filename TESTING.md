@@ -1,0 +1,16 @@
+# Portfolio Verification Notes
+
+## Automated checks
+
+- `npm test` passed on 2026-08-16: 4 component tests verified the updated Voice AI hero copy, CV-aligned project cards, and the GitHub, LinkedIn, and email destinations.
+- `npm run build` passed on 2026-08-16 with Vite production output generated successfully.
+
+## Local interface review
+
+The portfolio was reviewed locally at `http://localhost:8080/ahmed-ezzat-portfolio/`. The terminal/hacker design rendered correctly with a black background, neon green and cyan accents, monospace typography, terminal-window panels, command-line section headers, responsive navigation, and the animated role typing treatment.
+
+The visual review confirmed that the hero, About Me section, structured skills list, experience log, selected projects, and contact terminal use a cohesive visual system. The LinkedIn hero button was clicked and navigated directly to `https://www.linkedin.com/in/mrezzat/`.
+
+## Content review
+
+The redesigned page reflects the supplied CV, including the hams.ai TTS Lead role, 13.6k speech-training-hours metric, 154ms time-to-first-audio result, F5-TTS/TensorRT specialization, GenArabia work, selected Voice AI projects, publication, and Manus/IEEE volunteering.

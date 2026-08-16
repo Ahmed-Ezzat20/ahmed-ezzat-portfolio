@@ -14,3 +14,9 @@ The visual review confirmed that the hero, About Me section, structured skills l
 ## Content review
 
 The redesigned page reflects the supplied CV, including the hams.ai TTS Lead role, 13.6k speech-training-hours metric, 154ms time-to-first-audio result, F5-TTS/TensorRT specialization, GenArabia work, selected Voice AI projects, publication, and Manus/IEEE volunteering.
+
+## Live deployment review
+
+The production portfolio was published to the `gh-pages` branch and verified at `https://ahmed-ezzat20.github.io/ahmed-ezzat-portfolio/?v=terminal-2026`. The live hero rendered the terminal theme and exposed the GitHub, LinkedIn, email, Scholar, experience, contact, and CV controls. The CV button was clicked successfully and opened `https://ahmed-ezzat20.github.io/ahmed-ezzat-portfolio/Ahmed_Ezzat_CV.pdf`, confirming that the supplied two-page CV is publicly accessible from the portfolio.
+
+The live LinkedIn control was also clicked successfully. LinkedIn presented its public authentication wall, while preserving the intended destination in `sessionRedirect=https://www.linkedin.com/in/mrezzat/`; this verifies that the portfolio now uses the confirmed LinkedIn URL rather than the prior incorrect profile.

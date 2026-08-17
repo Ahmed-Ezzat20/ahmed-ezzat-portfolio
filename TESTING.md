@@ -38,3 +38,7 @@ The GitHub Pages deployment was verified directly at both shareable endpoints: `
 The local portfolio was opened with `?lang=ar`. Arabic labels, RTL navigation, Arabic typography, and inline English technical terms such as TTS, ASR, TensorRT, and GPU rendered correctly. The Arabic hero waveform panel remains present in the RTL grid (measured as a visible 489.6 × 380px panel); at the first viewport height it begins below the text area on the left, consistent with the responsive two-column layout.
 
 The Arabic publication was also reviewed locally at `/blog?lang=ar` and at an Arabic article URL. Both pages render a right-to-left editorial layout with Arabic headings and body text. Article links correctly retain `?lang=ar`, while embedded technical language such as Voice AI, TTS, ASR, TensorRT, GPU, and LinkedIn remains readable in context.
+
+The bilingual release was verified live at `https://ahmed-ezzat20.github.io/ahmed-ezzat-portfolio/?lang=ar`. The production portfolio shows Arabic RTL navigation, Arabic hero and section content, the EN language toggle, a right-to-left layout, and readable English Voice AI terms within Arabic paragraphs. The voice waveform panel now aligns alongside the Arabic hero content in the first viewport.
+
+The live Arabic Field Notes index and a direct Arabic article route were verified on GitHub Pages. The query-string locale (`?lang=ar`) is retained in article links, the article browser title is Arabic, the reading view is RTL, and mixed Arabic/English terminology such as TTS and ML remains legible in the published content.

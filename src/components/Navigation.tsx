@@ -33,6 +33,10 @@ const Navigation = () => {
   }, []);
 
   const goTo = (id: string) => {
+    if (id === 'blog') {
+      window.location.href = `${import.meta.env.BASE_URL}blog`;
+      return;
+    }
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
     setIsMenuOpen(false);
   };

@@ -26,3 +26,7 @@ The live LinkedIn control was also clicked successfully. LinkedIn presented its 
 The local Voice AI Signal portfolio was reviewed after adding the blog section. The page displays a dedicated **Field Notes** area with a featured Voice AI article, two additional article cards, topic and reading-time metadata, and a visual waveform treatment that matches the overall portfolio design. The navigation includes a Blog destination. Automated interaction coverage verified that selecting **Read note** opens the featured article reader and displays its article content.
 
 The production site was checked at `https://ahmed-ezzat20.github.io/ahmed-ezzat-portfolio/?v=blog-2026`. The Blog navigation item and the complete Field Notes blog index are live, including the featured article, category metadata, article cards, and the authoring guidance panel. The article-reader interaction is also covered by the automated component suite.
+
+## Dedicated publication routes
+
+The new editorial endpoints were reviewed locally. `/blog` renders a clean Field Notes landing page with a featured story and linked story index. `/blog/latency-is-a-product-decision` renders a focused long-form reading page with editorial serif typography, author/date/reading-time metadata, a share control, and a LinkedIn follow call-to-action. The visual layout matches the requested Medium-style reading experience while retaining Ahmed’s Voice AI visual identity.

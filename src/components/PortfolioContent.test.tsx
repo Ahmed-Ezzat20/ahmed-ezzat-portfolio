@@ -1,8 +1,10 @@
 import { cleanup, render, screen } from '@testing-library/react';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import HeroSection from './HeroSection';
 import ContactSection from './ContactSection';
 import PortfolioSection from './PortfolioSection';
 import BlogSection from './BlogSection';
+import BlogArticle from '../pages/BlogArticle';
 
 afterEach(cleanup);
 
@@ -39,14 +41,23 @@ describe('Voice AI Signal portfolio content', () => {
     expect(screen.getByText(/EgyLens/i)).toBeTruthy();
   });
 
-  it('renders the Voice AI blog and opens the featured article', async () => {
-    const { userEvent } = await import('@testing-library/user-event');
-    const user = userEvent.setup();
-    render(<BlogSection />);
+  it('links the home blog preview to dedicated article routes', () => {
+    render(<MemoryRouter><BlogSection /></MemoryRouter>);
 
-    expect(screen.getByText(/Notes from building Arabic Voice AI systems/i)).toBeTruthy();
-    await user.click(screen.getByRole('button', { name: /Read note/i }));
-    expect(screen.getByRole('dialog', { name: /Latency is a product decision/i })).toBeTruthy();
+    expect(screen.getByText(/Writing from the voice AI engineering field/i)).toBeTruthy();
+    expect(screen.getByRole('link', { name: /View all articles/i }).getAttribute('href')).toBe('/blog');
+    expect(screen.getByRole('link', { name: /Read article/i }).getAttribute('href')).toBe('/blog/latency-is-a-product-decision');
+  });
+
+  it('renders a Medium-style article at its dedicated route', () => {
+    render(
+      <MemoryRouter initialEntries={['/blog/latency-is-a-product-decision']}>
+        <Routes><Route path="/blog/:slug" element={<BlogArticle />} /></Routes>
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole('heading', { name: /Latency is a product decision/i })).toBeTruthy();
     expect(screen.getByText(/Why response time changes the conversation/i)).toBeTruthy();
+    expect(screen.getByRole('button', { name: /Share/i })).toBeTruthy();
   });
 });

@@ -30,3 +30,5 @@ The production site was checked at `https://ahmed-ezzat20.github.io/ahmed-ezzat-
 ## Dedicated publication routes
 
 The new editorial endpoints were reviewed locally. `/blog` renders a clean Field Notes landing page with a featured story and linked story index. `/blog/latency-is-a-product-decision` renders a focused long-form reading page with editorial serif typography, author/date/reading-time metadata, a share control, and a LinkedIn follow call-to-action. The visual layout matches the requested Medium-style reading experience while retaining Ahmed’s Voice AI visual identity.
+
+The GitHub Pages deployment was verified directly at both shareable endpoints: `/blog` and `/blog/latency-is-a-product-decision`. The index loaded with the Field Notes editorial layout, and the individual article loaded with its correct article-specific browser title and Medium-style long-form reading view. This confirms that direct route access works through the GitHub Pages SPA fallback.

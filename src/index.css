@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&family=Noto+Kufi+Arabic:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -50,6 +50,12 @@
   ::-webkit-scrollbar-track { background: #081321; }
   ::-webkit-scrollbar-thumb { background: #1f4d67; border-radius: 99px; }
   ::-webkit-scrollbar-thumb:hover { background: #2ca9d7; }
+
+  html[dir='rtl'] body { font-family: 'Noto Sans Arabic', 'IBM Plex Sans', sans-serif; }
+  html[dir='rtl'] .font-display { font-family: 'Noto Kufi Arabic', 'Manrope', sans-serif; letter-spacing: -0.025em; }
+  html[dir='rtl'] .font-mono { font-family: 'Noto Sans Arabic', 'DM Mono', monospace; letter-spacing: 0; }
+  html[dir='rtl'] .eyebrow { letter-spacing: 0.04em; }
+  .keep-ltr { direction: ltr; unicode-bidi: isolate; display: inline-block; }
 }
 
 @layer components {

@@ -32,3 +32,9 @@ The production site was checked at `https://ahmed-ezzat20.github.io/ahmed-ezzat-
 The new editorial endpoints were reviewed locally. `/blog` renders a clean Field Notes landing page with a featured story and linked story index. `/blog/latency-is-a-product-decision` renders a focused long-form reading page with editorial serif typography, author/date/reading-time metadata, a share control, and a LinkedIn follow call-to-action. The visual layout matches the requested Medium-style reading experience while retaining Ahmed’s Voice AI visual identity.
 
 The GitHub Pages deployment was verified directly at both shareable endpoints: `/blog` and `/blog/latency-is-a-product-decision`. The index loaded with the Field Notes editorial layout, and the individual article loaded with its correct article-specific browser title and Medium-style long-form reading view. This confirms that direct route access works through the GitHub Pages SPA fallback.
+
+## Arabic RTL review
+
+The local portfolio was opened with `?lang=ar`. Arabic labels, RTL navigation, Arabic typography, and inline English technical terms such as TTS, ASR, TensorRT, and GPU rendered correctly. The Arabic hero waveform panel remains present in the RTL grid (measured as a visible 489.6 × 380px panel); at the first viewport height it begins below the text area on the left, consistent with the responsive two-column layout.
+
+The Arabic publication was also reviewed locally at `/blog?lang=ar` and at an Arabic article URL. Both pages render a right-to-left editorial layout with Arabic headings and body text. Article links correctly retain `?lang=ar`, while embedded technical language such as Voice AI, TTS, ASR, TensorRT, GPU, and LinkedIn remains readable in context.
